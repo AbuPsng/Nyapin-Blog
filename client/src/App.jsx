@@ -3,7 +3,7 @@ import HomePages from "./pages/HomePages"
 import BlogListsPage from "./pages/BlogListsPage"
 
 
-import { createBrowserRouter, RouterProvider, Route, Link, } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import RegisterPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
@@ -40,11 +40,8 @@ function App() {
 
   return (
     <>
-      <Template>
-        <RouterProvider router={router}>
-
-        </RouterProvider>
-      </Template>
+      <RouterProvider router={router}>
+      </RouterProvider>
     </>
   )
 }

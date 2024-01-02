@@ -1,10 +1,13 @@
+import Template from "../components/Template"
 
 
 const HomePages = () => {
     return (
-        <div>
-            <h1>Home Page</h1>
-        </div>
+        <Template>
+            <div>
+                <h1>Home Page</h1>
+            </div>
+        </Template>
     )
 }
 

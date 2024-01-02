@@ -1,9 +1,12 @@
+import Template from "../components/Template"
 
 const BlogListsPage = () => {
     return (
-        <div>
-            <h1>Blog list pages</h1>
-        </div>
+        <Template>
+            <div>
+                <h1>Blog list pages</h1>
+            </div>
+        </Template >
     )
 }
 

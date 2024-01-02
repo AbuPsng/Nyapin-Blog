@@ -1,3 +1,4 @@
+import Template from "../components/Template"
 
 
 const LoginPage = () => {
