@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import { useStore } from "../store/context"
 import { useState } from "react"
+import { useStore } from "../utils/useStore"
 
 const pageLinks = [
     { name: "Home", link: "/" },
@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <>
-            <header className="w-full left-0 px-4 right-0 bg-gradient-to-b from-blue-500 to-teal-400 fixed top-0  ">
+            <header className="w-full z-20 left-0 px-4 right-0 bg-gradient-to-b from-blue-500 to-teal-400 fixed top-0  ">
                 <div className="max-w-6xl mx-auto flex items-center justify-between py-5 text-sm font-semibold md:py-4">
 
                     {/* //**links lists */}
