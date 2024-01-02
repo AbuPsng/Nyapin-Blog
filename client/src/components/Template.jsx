@@ -4,7 +4,7 @@ import Footer from './Footer'
 const Template = ({ children }) => {
     return (
         <>
-            <div className="w-full px-20">
+            <div className="w-full md:px-20 px-2">
                 <Navbar />
                 {children}
                 <Footer />

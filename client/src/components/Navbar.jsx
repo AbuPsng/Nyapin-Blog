@@ -13,12 +13,13 @@ const authLinks = [
 
 const Navbar = () => {
     return (
-        <div className="w-full ">
+        <div className="w-full flex items-center justify-between py-3 text-sm font-semibold">
             {/* //**links lists */}
-            <ul>
+            <Link to="/" className="tracking-wider font-bold">abupsng</Link>
+            <ul className=" hidden md:flex">
                 {
                     pageLinks.map(links => (
-                        <Link to={links.link} key={links.name} >{links.name}</Link>
+                        <Link to={links.link} key={links.name} className="px-3 py-2" >{links.name}</Link>
                     ))
                 }
             </ul>
@@ -27,7 +28,7 @@ const Navbar = () => {
             <ul>
                 {
                     authLinks.map(links => (
-                        <Link to={links.link} key={links.name} >{links.name}</Link>
+                        <Link to={links.link} key={links.name} className={`px-4 py-2 rounded-sm ${links.name === "Register" ? "bg-black text-white" : ""}`} >{links.name}</Link>
                     ))
                 }
             </ul>
