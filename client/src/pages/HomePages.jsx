@@ -1,12 +1,13 @@
 import Template from "../components/Template"
+import BlogsSection from "../sections/BlogsSection"
+import HeroSections from "../sections/heroSections"
 
 
 const HomePages = () => {
     return (
         <Template>
-            <div>
-                <h1>Home Page</h1>
-            </div>
+            <HeroSections />
+            <BlogsSection />
         </Template>
     )
 }
