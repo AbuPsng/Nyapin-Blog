@@ -30,7 +30,7 @@ const Navbar = () => {
                         <Link to="/" className="tracking-wider flex items-center pr-4 text-xl font-bold">abupsng</Link>
                         {
                             pageLinks.map(links => (
-                                <Link to={links.link} key={links.name} className="px-3 py-2 hidden md:flex" >{links.name}</Link>
+                                <Link to={links.link} key={links.name} className="px-3 py-2 hidden hover:text-gray-600 md:flex" >{links.name}</Link>
                             ))
                         }
                     </ul>
@@ -57,7 +57,7 @@ const Navbar = () => {
                                 :
                                 // login and registration
                                 authLinks.map(links => (
-                                    <Link to={links.link} key={links.name} className={`px-4 py-2 rounded-base ${links.name === "Sign Up" ? "bg-black text-white" : ""}`} >{links.name}</Link>
+                                    <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign Up" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
                                 ))
                         }
                     </ul>

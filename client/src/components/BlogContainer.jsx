@@ -2,7 +2,7 @@
 
 const BlogContainer = () => {
     return (
-        <div className=" w-[30%] py-4 flex flex-col gap-y-3">
+        <div className="  py-4 flex flex-col gap-y-3 w-full md:w-[30%]">
             <img src="images/lake-land.jpg" className="h-44 w-full" alt="near lake" />
             <div className="flex flex-col gap-y-1">
                 <p className="text-[13px] font-semibold">Abu - 02 Jan 2022</p>
