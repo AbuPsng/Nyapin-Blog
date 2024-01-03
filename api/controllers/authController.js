@@ -29,7 +29,7 @@ export const sign_in = asyncHandler(async (req, res, next) => {
 
     generateToken(res, existUser._id)
 
-    res.status(200).json({ status: "success", message: "Logged in successfully", data: existUser })
+    res.status(200).json({ status: "success", message: "Logged in successfully", data: { name: existUser.name, email: existUser.email, userId: existUser._id } })
 })
 
 export const update_password = asyncHandler(async (req, res, next) => {

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useUser } from "../utils/useUser"
+import axios from "axios"
 
 const pageLinks = [
     { name: "Home", link: "/" },
@@ -15,10 +16,25 @@ const authLinks = [
 
 const Navbar = () => {
 
-    const [showLinks, setShowLinks] = useState(false)
-    console.log(showLinks)
+    const { user, setUser } = useUser()
 
-    const { isLogin } = useUser()
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/v1/sign_out")
+            const status = response.data.status
+            if (status === "success") {
+                localStorage.removeItem("user")
+                setUser(null)
+            }
+            navigate("/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const [showLinks, setShowLinks] = useState(false)
 
     return (
         <>
@@ -40,7 +56,7 @@ const Navbar = () => {
                         {/*//*  show links or not  */}
 
                         {
-                            isLogin ?
+                            user ?
                                 <>
                                     {/* for mobile screen */}
                                     <button className="w-6 h-6 bg-slate-900 text-white rounded-full flex justify-center items-top md:hidden " onClick={() => setShowLinks(!showLinks)}>
@@ -51,7 +67,7 @@ const Navbar = () => {
 
                                     {/* for big screen */}
                                     <div className="items-center justify-center hidden md:flex">
-                                        <button className="px-4 py-2 ml-3 bg-black text-white rounded-sm">Sign Out</button>
+                                        <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-black text-white rounded-sm">Sign Out</button>
                                     </div>
                                 </>
                                 :

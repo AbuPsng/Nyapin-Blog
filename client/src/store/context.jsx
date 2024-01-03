@@ -1,10 +1,10 @@
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({ name: "", email: "", userId: "" })
+    const [user, setUser] = useState(null)
+
 
 
     //** */ Checking if user is already login
@@ -23,9 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     //** */ logout function
 
-    const handleLogout = async () => {
-        const response = await axios.
-    }
+
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>
