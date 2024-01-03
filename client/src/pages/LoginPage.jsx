@@ -20,13 +20,11 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(`http://localhost:5000/api/v1/sign_in`, { email, password })
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/sign_in`, { email, password })
             const data = response.data.data
-            console.log(data)
             setUser({ ...user, name: data.name, email: data.email, userId: data._id })
             localStorage.setItem("user", JSON.stringify({ ...data, password: null }))
             navigate("/")
-            console.log(response)
         } catch (error) {
             console.log(error.response.data.message)
             alert(error.response.data.message)

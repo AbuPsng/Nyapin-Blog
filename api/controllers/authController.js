@@ -13,7 +13,7 @@ export const sign_up = asyncHandler(async (req, res, next) => {
 
     generateToken(res, newUser._id)
 
-    res.status(200).json({ status: "success", message: "Account created successfully", data: newUser })
+    res.status(200).json({ status: "success", message: "Account created successfully", data: true })
 })
 
 export const sign_in = asyncHandler(async (req, res, next) => {
