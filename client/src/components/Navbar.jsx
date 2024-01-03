@@ -26,6 +26,7 @@ const Navbar = () => {
             const status = response.data.status
             if (status === "success") {
                 localStorage.removeItem("user")
+                alert(`See you soon ${user.name}`)
                 setUser(null)
             }
             navigate("/")

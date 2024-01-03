@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Template from "../components/Template"
 import { useState } from "react"
 import axios from "axios"
@@ -11,13 +11,15 @@ const RegisterPage = () => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const navigate = useNavigate()
+
     const handleRegister = async (e) => {
         e.preventDefault()
         if (password !== confirmPassword) return alert("Password doesn't match")
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/sign_up`, { name, email, password, confirmPassword })
-            console.log(response)
-
+            alert(response.data.message)
+            navigate("/sign_in")
         } catch (error) {
             alert(error.response.data.message)
         }
