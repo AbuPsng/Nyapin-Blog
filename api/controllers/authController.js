@@ -51,3 +51,8 @@ export const update_password = asyncHandler(async (req, res, next) => {
     res.status(200).json({ status: "success", message: "Password updated successfully", data: existUser })
 }
 )
+
+export const sign_out = asyncHandler(async (req, res, next) => {
+    res.cookie("jwt", "loggedOut", { expires: new Date(Date.now() + 100), httpOnly: true })
+    res.status(200).json({ status: "success" })
+})

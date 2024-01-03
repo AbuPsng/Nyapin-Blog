@@ -1,13 +1,35 @@
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
-export const Store = createContext()
+export const AuthContext = createContext()
 
-export const StoreProvider = ({ children }) => {
-    const [isLogin, setIsLogin] = useState(false)
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState({ name: "", email: "", userId: "" })
+
+
+    //** */ Checking if user is already login
+
+    const isUserExist = () => {
+        const userData = localStorage.getItem("user")
+        if (userData) {
+            const user = JSON.parse(userData)
+            return setUser({ ...user, name: user.name })
+        }
+    }
+
+    useEffect(() => {
+        isUserExist()
+    }, [])
+
+    //** */ logout function
+
+    const handleLogout = async () => {
+        const response = await axios.
+    }
 
     return (
-        <Store.Provider value={{ isLogin, setIsLogin }}>
+        <AuthContext.Provider value={{ user, setUser }}>
             {children}
-        </Store.Provider>
+        </AuthContext.Provider>
     )
 }

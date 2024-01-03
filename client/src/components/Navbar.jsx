@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
-import { useStore } from "../utils/useStore"
+import { useUser } from "../utils/useUser"
 
 const pageLinks = [
     { name: "Home", link: "/" },
@@ -18,7 +18,7 @@ const Navbar = () => {
     const [showLinks, setShowLinks] = useState(false)
     console.log(showLinks)
 
-    const { isLogin } = useStore()
+    const { isLogin } = useUser()
 
     return (
         <>
