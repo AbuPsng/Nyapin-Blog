@@ -1,32 +1,28 @@
 import { v2 as cloudinary } from 'cloudinary';
+import dotenv from "dotenv"
 import fs from "fs"
 
+dotenv.config({ path: ".env" })
+
 cloudinary.config({
-    cloud_name: process.env.CLOUDINRAY_CLOUD_NAME,
-    api_key: process.env.CLOUDINRAY_CLOUD_API,
-    api_secret: process.env.CLOUDINRAY_CLOUD_SECRET
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 export const uploadOnCloudinary = async (localFilePath) => {
     try {
-        if (!localFilePath) return null
-        //Upload the file on cloudinary
-
-        const response = await cloudinary.uploader.upload(localFilePath, {
+        const default_Image = "public/images/default_images.jpg"
+        //**upload file on cloudinary
+        const response = await cloudinary.uploader.upload(localFilePath || default_Image, {
             resource_type: "auto"
         })
-        //file has been uploaded successfully
-
-        console.log("file is uploaded on cloudinary", response.url)
-        return response
-
+        console.log(`file is upload and its url is ${response.url}`)
+        if (localFilePath) fs.unlinkSync(localFilePath)
+        return response.url
     } catch (error) {
-        // remove the locally saved temporary file as the uploading operation got failed
-        fs.unlinkSync(localFilePath)
+        // if(there is an error then it will deleted using unlinkSync)
+        if (localFilePath) fs.unlinkSync(localFilePath)
+        return error
     }
 }
-
-
-cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-    { public_id: "olympic_flag" },
-    function (error, result) { console.log(result); });

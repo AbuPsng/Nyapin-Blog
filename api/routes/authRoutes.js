@@ -1,11 +1,12 @@
 import express from "express"
 import { sign_in, sign_out, sign_up, update_password } from "../controllers/authController.js"
 import { isSignIn } from "../utils/authentication.js"
+import { upload } from "../utils/multer.js"
 
 
 const router = express.Router()
 
-router.post("/sign_up", sign_up)
+router.post("/sign_up", upload.single("file"), sign_up)
 
 router.post("/sign_in", sign_in)
 

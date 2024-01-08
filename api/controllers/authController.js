@@ -1,15 +1,20 @@
 import userModel from "../models/userModel.js"
 import asyncHandler from "express-async-handler"
 import { generateToken } from "../utils/generateToken.js"
+import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 
 export const sign_up = asyncHandler(async (req, res, next) => {
+
     const { name, email, password } = req.body
 
     const existUser = await userModel.findOne({ email })
+
     if (existUser) return res.status(409).json({ status: 'error', message: "User already exist" })
 
-    const newUser = await userModel.create({ name, email, password, })
+    const cloudinary_image = await uploadOnCloudinary(req.file?.path)
+
+    const newUser = await userModel.create({ name, email, password, profileImage: cloudinary_image })
 
     generateToken(res, newUser._id)
 
@@ -28,8 +33,9 @@ export const sign_in = asyncHandler(async (req, res, next) => {
     if (!matchPassword) return res.status(401).json({ status: "error", message: "Either email or password is wrong" })
 
     generateToken(res, existUser._id)
+    console.log(existUser)
 
-    res.status(200).json({ status: "success", message: "Logged in successfully", data: { name: existUser.name, email: existUser.email, userId: existUser._id } })
+    res.status(200).json({ status: "success", message: "Logged in successfully", data: { name: existUser.name, email: existUser.email, userId: existUser._id, profileImage: existUser.profileImage } })
 })
 
 export const update_password = asyncHandler(async (req, res, next) => {

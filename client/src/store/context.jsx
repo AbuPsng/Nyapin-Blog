@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
         const userData = localStorage.getItem("user")
         if (userData) {
             const user = JSON.parse(userData)
-            return setUser({ ...user, name: user.name })
+            return setUser({ ...user, name: user.name, profilePicture: user.profilePicture })
         }
     }
 
