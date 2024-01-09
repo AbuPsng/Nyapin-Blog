@@ -16,7 +16,6 @@ const authLinks = [
 const Navbar = () => {
 
     const { user, setUser } = useUser()
-    console.log(user)
 
     const navigate = useNavigate()
 
@@ -69,7 +68,7 @@ const Navbar = () => {
                                     {/* for big screen */}
                                     <div className="items-center gap-x-2 justify-center hidden md:flex">
                                         <Link to="my_details">
-                                            <img className="w-10 h-10 object-fit" src={`${user.profileImage}`} alt={`${user.name} profile image`} />
+                                            <img className="w-10 h-10 rounded-full object-fit" src={`${user.profileImage}`} alt={`${user.name} profile image`} />
                                         </Link>
                                         <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-black text-white rounded-sm">Sign Out</button>
                                     </div>

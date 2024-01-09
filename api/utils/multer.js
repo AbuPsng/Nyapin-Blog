@@ -1,6 +1,5 @@
 import expressAsyncHandler from "express-async-handler"
 import multer from "multer"
-import sharp from 'sharp';
 import fs from "fs"
 
 const storage = multer.diskStorage({

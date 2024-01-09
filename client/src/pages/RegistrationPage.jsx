@@ -11,7 +11,7 @@ const RegisterPage = () => {
     const [password, setPassword] = useState("")
     const [profileImage, setProfileImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 

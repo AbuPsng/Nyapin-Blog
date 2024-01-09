@@ -11,8 +11,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    main_image: {
-        type: String
+    coverImage: {
+        type: String,
+        required: true
     },
     genre: {
         type: [String],

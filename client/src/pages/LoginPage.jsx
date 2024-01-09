@@ -28,6 +28,8 @@ const LoginPage = () => {
             navigate("/")
         } catch (error) {
             alert(error.response.data.message)
+            console.log(error.message)
+            console.log(error)
         }
     }
 

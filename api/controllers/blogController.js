@@ -2,6 +2,7 @@ import blogModel from "../models/blogModel.js"
 import userModel from "../models/userModel.js"
 import asyncHandler from "express-async-handler"
 import { isExist, isNotExist } from "../utils/checkExist.js"
+import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 //*** Get all blogs */
 
@@ -51,9 +52,12 @@ export const createBlog = asyncHandler(async (req, res, next) => {
 
     const existBlog = await blogModel.findOne({ title })
 
-    isNotExist(res, existBlog, "Blog with this name is already exist")
+    if (existBlog) return res.status(405).json({ status: "error", message: "Blog with this name is already exist" })
 
-    const newBlog = await blogModel.create({ title, description, genre, author: req.user.userId })
+    const blogCoverImageUrl = await uploadOnCloudinary(req.file?.path)
+    console.log(blogCoverImageUrl)
+
+    const newBlog = await blogModel.create({ title, description, genre, author: req.user.userId, coverImage: blogCoverImageUrl })
 
     res.status(200).json({ status: "success", message: "Blog created successfully", data: newBlog })
 })

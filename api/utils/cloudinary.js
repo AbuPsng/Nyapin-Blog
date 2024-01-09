@@ -12,7 +12,7 @@ cloudinary.config({
 
 export const uploadOnCloudinary = async (localFilePath) => {
     try {
-        const default_Image = "public/images/default_images.jpg"
+        const default_Image = "public/default/default_images.jpg"
         //**upload file on cloudinary
         const response = await cloudinary.uploader.upload(localFilePath || default_Image, {
             resource_type: "auto"
