@@ -60,7 +60,7 @@ export const createBlog = asyncHandler(async (req, res, next) => {
     const blogCoverImageUrl = await uploadOnCloudinary(req.file?.path)
     console.log(blogCoverImageUrl)
 
-    const newBlog = await blogModel.create({ title, description, genre: newGenre, author: req.user.userId, coverImage: blogCoverImageUrl })
+    const newBlog = await blogModel.create({ title, description, genre: newGenre, author: req.user.id, coverImage: blogCoverImageUrl })
 
     res.status(200).json({ status: "success", message: "Blog created successfully", data: newBlog })
 })

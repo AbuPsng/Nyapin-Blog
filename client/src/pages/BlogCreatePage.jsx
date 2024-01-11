@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Template from '../components/Template'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import ShowModel from '../components/ShowModel'
 
 const genres = ["nature", "sea", "technology", "mobile", "bird", "place", "hometown", "country", "forest", "animal", "space"]
 
@@ -10,6 +11,8 @@ const BlogCreatePage = () => {
     const [description, setDescription] = useState("")
     const [coverImage, setCoverImage] = useState(null)
     const [genre, setGenre] = useState([])
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -25,6 +28,7 @@ const BlogCreatePage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append("title", title)
@@ -34,7 +38,9 @@ const BlogCreatePage = () => {
             const response = await axios.post("/blogs/create_blog", formData, { withCredentials: true })
             alert(response.data.message)
             navigate("/blog_lists")
+            setIsLoading(false)
         } catch (error) {
+            setIsLoading(false)
             alert(error.response.data.message)
         }
     }
@@ -42,6 +48,7 @@ const BlogCreatePage = () => {
     return (
         <Template>
             <main className='h-screen flex justify-center items-center'>
+                {isLoading && <ShowModel message={"Uploading..."} />}
                 <div className='w-full h-full py-14 px-8 '>
                     <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-10'>
                         <div className='flex gap-x-5 items-center'>

@@ -23,11 +23,14 @@ export const isAdmin = expressAsyncHandler(async (req, res, next) => {
 
 export const isAuthor = expressAsyncHandler(async (req, res, next) => {
     const { blogId } = req.params
-    const user = req.user.userId
+    const user = req.user.id
 
     const author = await userModel.findById(user)
+    console.log(author.role)
 
     const blog = await blogModel.findById(blogId)
+    console.log(blog.author)
+    console.log(user)
 
     if (blog.author.toString() !== user && author.role !== 1) return next(new Error("You are not the owner"))
 

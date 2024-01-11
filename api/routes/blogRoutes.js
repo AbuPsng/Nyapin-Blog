@@ -1,10 +1,16 @@
 import express from "express"
+import cors from "cors"
 import { createBlog, deleteBlog, getAllBlog, getMyBlogs, getSingleBlog, updateBlog } from "../controllers/blogController.js"
 import { isSignIn } from "../utils/authentication.js"
 import { isAuthor } from "../utils/isAuthor.js"
 import { upload } from "../utils/multer.js"
 
 const router = express.Router()
+
+router.use(cors({
+    credentials: true,
+    origin: "http://localhost:5173"
+}))
 
 router.get("/", getAllBlog)
 

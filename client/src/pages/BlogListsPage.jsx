@@ -11,9 +11,8 @@ import { Link } from "react-router-dom";
 const BlogListsPage = () => {
 
     const [search, setSearch] = useState("")
-
     const [blogs, setBlogs] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const getAllBlogs = async () => {
         setIsLoading(true)
@@ -27,13 +26,24 @@ const BlogListsPage = () => {
             setIsLoading(false)
             console.log(error)
         }
-
     }
 
     useEffect(() => {
         getAllBlogs()
     }, [])
-    console.log(blogs?.[0]?.title)
+
+    const handleDelete = async (blogId) => {
+        try {
+            const response = await axios.delete(`/blogs/${blogId}`)
+            const data = response.data
+            console.log(response, "response")
+            console.log(data, "data")
+            getAllBlogs()
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
     return (
         <Template>
@@ -56,8 +66,8 @@ const BlogListsPage = () => {
                         <div className="flex w-full gap-x-10 gap-y-6 justify-start items-start flex-wrap">
                             {
                                 blogs?.map(blog => (
-                                    <div key={blog._id} className="w-1/3">
-                                        < BlogContainer blog={blog} />
+                                    <div key={blog._id} className="w-1/4">
+                                        < BlogContainer blog={blog} handleDelete={handleDelete} />
                                     </div>
                                 ))
                             }

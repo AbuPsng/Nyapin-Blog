@@ -23,7 +23,7 @@ const LoginPage = () => {
             const response = await axios.post("/sign_in", { email, password })
             const data = response.data.data
 
-            setUser({ ...user, name: data.name, email: data.email, userId: data._id })
+            setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage })
 
             localStorage.setItem("user", JSON.stringify({ ...data, password: null }))
             alert(`Welcome ${data.name}`)
