@@ -16,8 +16,6 @@ export const sign_up = asyncHandler(async (req, res, next) => {
 
     const newUser = await userModel.create({ name, email, password, profileImage: cloudinary_image })
 
-    generateToken(res, newUser._id)
-
     res.status(200).json({ status: "success", message: "Account created successfully", data: true })
 })
 
@@ -32,9 +30,19 @@ export const sign_in = asyncHandler(async (req, res, next) => {
 
     if (!matchPassword) return res.status(401).json({ status: "error", message: "Either email or password is wrong" })
 
-    generateToken(res, existUser._id)
+    const token = generateToken(res, existUser._id)
+    console.log(token)
 
-    res.status(200).json({ status: "success", message: "Logged in successfully", data: { name: existUser.name, email: existUser.email, userId: existUser._id, profileImage: existUser.profileImage } })
+    res.cookie('blog', token, {
+        httpOnly: true,
+    }).status(202).json({
+        status: "success", message: "Logged in successfully", data: {
+            name: existUser.name,
+            email: existUser.email,
+            userId: existUser._id,
+            profileImage: existUser.profileImage
+        }
+    })
 })
 
 export const update_password = asyncHandler(async (req, res, next) => {

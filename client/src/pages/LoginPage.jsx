@@ -20,9 +20,11 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/sign_in`, { email, password })
+            const response = await axios.post("/sign_in", { email, password })
             const data = response.data.data
+
             setUser({ ...user, name: data.name, email: data.email, userId: data._id })
+
             localStorage.setItem("user", JSON.stringify({ ...data, password: null }))
             alert(`Welcome ${data.name}`)
             navigate("/")

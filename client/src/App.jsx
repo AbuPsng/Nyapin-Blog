@@ -1,13 +1,17 @@
-import Template from "./components/Template"
 import HomePages from "./pages/HomePages"
 import BlogListsPage from "./pages/BlogListsPage"
-
+import axios from "axios";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import RegisterPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
+import BlogCreatePage from "./pages/BlogCreatePage";
+import BlogUpdatePage from "./pages/BlogUpdatePage";
+
+axios.defaults.baseURL = "http://localhost:5000/api/v1"
+axios.defaults.withCredentials = true
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/my_details",
     element: <UserDetailsPage />
+  },
+  {
+    path: "/create_blog",
+    element: <BlogCreatePage />
+  },
+  {
+    path: "/update_blog",
+    element: <BlogUpdatePage />
   },
 ]);
 

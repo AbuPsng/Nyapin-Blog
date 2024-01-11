@@ -8,16 +8,23 @@ import userRouter from "./routes/userRoutes.js"
 import authRouter from "./routes/authRoutes.js"
 import blogRouter from "./routes/blogRoutes.js"
 import reviewRouter from "./routes/reviewRoutes.js"
+import { test } from "./utils/authentication.js"
+const router = express.Router()
 
 dotenv.config()
 
 connectDB()
 
 //********** Global Middleware */
-app.use(express.static('public'));
-app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cookieParser())
+
+router.use(cors({
+    credentials: true,
+    origin: "http://localhost:5173/"
+}))
+
+app.use(express.static('public'));
 
 // ******** Routes
 
@@ -25,6 +32,7 @@ app.use("/api/v1/", authRouter)
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/reviews", reviewRouter)
+app.use("/api/v1/test", test)
 
 app.get("/", (req, res) => {
     res.send("Hi how are you??")

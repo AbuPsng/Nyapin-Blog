@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from "axios"
 import BlogContainer from '../components/BlogContainer'
 
@@ -29,10 +29,11 @@ const BlogsSection = () => {
     return (
         <main className='flex flex-col gap-y-8'>
             <h2 className='text-2xl font-semibold tracking-wider text-center'>Blogs</h2>
-            <div className='flex gap-x-10 gap-y-6 justify-start items-start flex-wrap'>
-                {
+            <div className='flex gap-x-6 gap-y-6 justify-center w-full items-start flex-wrap md:justify-start'>
+                {isLoading ? <p className='text-2xl text-teal-500'>Loading....</p>
+                    :
                     blogs?.map(blog => (
-                        <div key={blog._id} className='w-1/3'>
+                        <div key={blog._id} className='md:w-[thirty] w-[twentySix]'>
                             <BlogContainer blog={blog} />
                         </div>
                     )
