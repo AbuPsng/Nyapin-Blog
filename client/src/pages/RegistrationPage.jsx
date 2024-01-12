@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import Template from "../components/Template"
 import { useState } from "react"
+import ShowModel from "../components/ShowModel"
 import axios from "axios"
 
 
@@ -12,10 +13,13 @@ const RegisterPage = () => {
     const [profileImage, setProfileImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate()
 
     const handleRegister = async (e) => {
         e.preventDefault()
+        setIsLoading(true)
         if (password !== confirmPassword) return alert("Password doesn't match")
         try {
             const formData = new FormData();
@@ -24,9 +28,11 @@ const RegisterPage = () => {
             formData.append("password", password)
             formData.append("file", profileImage)
             const response = await axios.post('/sign_up', formData)
-            alert(response.data.message)
+            console.log(response.data)
             navigate("/sign_in")
+            setIsLoading(false)
         } catch (error) {
+            setIsLoading(false)
             alert(error.response.data.message)
         }
     }
@@ -35,6 +41,7 @@ const RegisterPage = () => {
     return (
         <Template>
             <main className="h-screen flex justify-center items-center">
+                {isLoading && <ShowModel message='Loading....' />}
                 <form onSubmit={handleRegister} className="bg-gradient-to-t from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-4 p-12">
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your name" />
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />

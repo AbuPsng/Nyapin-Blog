@@ -45,9 +45,7 @@ export const getSingleBlog = asyncHandler(async (req, res, next) => {
 export const createBlog = asyncHandler(async (req, res, next) => {
 
     const { title, description, genre } = req.body
-    console.log(genre.split(","))
     const newGenre = genre.split(",")
-    console.log(newGenre.length)
 
     isExist(res, title, "title")
     isExist(res, description, " description")
@@ -58,7 +56,6 @@ export const createBlog = asyncHandler(async (req, res, next) => {
     if (existBlog) return res.status(405).json({ status: "error", message: "Blog with this name is already exist" })
 
     const blogCoverImageUrl = await uploadOnCloudinary(req.file?.path)
-    console.log(blogCoverImageUrl)
 
     const newBlog = await blogModel.create({ title, description, genre: newGenre, author: req.user.id, coverImage: blogCoverImageUrl })
 
