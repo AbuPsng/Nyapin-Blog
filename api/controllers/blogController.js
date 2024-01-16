@@ -66,8 +66,16 @@ export const createBlog = asyncHandler(async (req, res, next) => {
 
 export const updateBlog = asyncHandler(async (req, res, next) => {
 
+    console.log("update blog body", req.body)
+    console.log("update blog id ", req.params.blogId)
 
     const updatedBlog = await blogModel.findByIdAndUpdate(req.params.blogId, req.body, { new: true })
+
+    if (!updatedBlog) {
+        return res.status(404).json({ error: 'Blog not found' });
+    }
+
+    console.log("update blog", updateBlog)
 
     res.status(200).json({ status: "success", message: "Blog updated successfully", data: updatedBlog })
 })

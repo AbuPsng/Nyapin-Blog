@@ -1,4 +1,5 @@
 import BlogContainer from '../components/BlogContainer'
+import ShowModel from '../components/ShowModel'
 import { useBlog } from '../utils/useBlogs'
 
 const BlogsSection = () => {
@@ -9,7 +10,7 @@ const BlogsSection = () => {
         <main className='flex flex-col gap-y-8 py-12'>
             <h2 className='text-4xl text-center'>Latests Blogs</h2>
             {
-                isLoading ? <p className="text-3xl text-teal-500">Loading....</p>
+                isLoading ? <ShowModel message={"Loading..."} />
                     :
                     <div className="flex w-full gap-x-10 gap-y-6 justify-center items-start flex-wrap">
                         {

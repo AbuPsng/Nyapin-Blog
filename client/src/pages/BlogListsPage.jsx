@@ -1,35 +1,18 @@
 import Template from "../components/Template"
 import BlogContainer from "../components/BlogContainer"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { IoFilterSharp } from "react-icons/io5";
 import { IoAddOutline } from "react-icons/io5";
 import axios from "axios"
 import { Link } from "react-router-dom";
 import ShowModel from '../components/ShowModel'
+import { useBlog } from "../utils/useBlogs";
 
 const BlogListsPage = () => {
 
     const [search, setSearch] = useState("")
-    const [blogs, setBlogs] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
 
-    const getAllBlogs = async () => {
-        setIsLoading(true)
-        try {
-            const response = await axios.get("/blogs")
-            console.log(response.data.data)
-            const { data } = response.data
-            setBlogs(data)
-            setIsLoading(false)
-        } catch (error) {
-            setIsLoading(false)
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        getAllBlogs()
-    }, [])
+    const { blogs, isLoading } = useBlog()
 
     const handleDelete = async (blogId) => {
         try {
@@ -37,7 +20,6 @@ const BlogListsPage = () => {
             const data = response.data
             console.log(response, "response")
             console.log(data, "data")
-            getAllBlogs()
         } catch (error) {
             console.log(error)
         }
@@ -65,9 +47,9 @@ const BlogListsPage = () => {
                         <div className="flex w-full gap-x-10 gap-y-6 justify-center items-start flex-wrap">
                             {
                                 blogs?.map(blog => (
-                                    <Link key={blog._id} to={blog._id} className="w-full md:w-5/12 lg:w-1/4">
+                                    <div key={blog._id} className="w-full md:w-5/12 lg:w-1/4">
                                         < BlogContainer blog={blog} handleDelete={handleDelete} />
-                                    </Link>
+                                    </div>
                                 ))
                             }
                         </div>

@@ -12,7 +12,7 @@ const BlogContainer = ({ blog }) => {
     const [isDelete, setIsDelete] = useState(false)
 
     return (
-        <div className="relative py-4 flex flex-col gap-y-3 w-full">
+        <div className="relative py-4 px-3 rounded-md bg-teal-100 bg-opacity-30 hover:shadow-xl flex flex-col gap-y-3 w-full">
 
             {
                 isDelete && <DeleteModel blogId={blog._id} setIsDelete={setIsDelete} />
@@ -21,7 +21,7 @@ const BlogContainer = ({ blog }) => {
             {
                 user?.userId === blog?.author ?
                     <div className="absolute right-0 top-4 rounded-lg " >
-                        <Link to="/update_blog">
+                        <Link to={`/update_blog/${blog._id}`}>
                             <button className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3 "><FaEdit /></button>
                         </Link>
                         <button onClick={() => setIsDelete(true)} className="font-semibold bg-red-200 hover:bg-red-400 rounded-lg md:py-2 md:px-3 "><MdDelete /></button>
@@ -31,20 +31,20 @@ const BlogContainer = ({ blog }) => {
             }
 
             {/* link */}
-            <Link to={blog._id} className="p-2 bg-teal-200 hover:bg-teal-400 rounded-md absolute right-3 bottom-20">
+            <Link to={`/blog_details/${blog._id}`} className="p-2 bg-teal-200 hover:bg-teal-400 rounded-md absolute right-3 bottom-20">
                 <FaExternalLinkAlt />
             </Link>
 
-            <img src={`${blog.coverImage}`} className="h-44 w-full" alt="near lake" />
+            <img src={`${blog.coverImage}`} className="h-44 w-full object-cover" alt="near lake" />
             <div className="flex flex-col gap-y-1">
                 <p className="text-[13px] font-semibold">{blog.author} - 02 Jan 2022</p>
                 <h3 className="text-lg font-semibold">{blog.title.length >= 3 ? blog.title.split(" ").slice(0, 3).join(" ") : blog.title}</h3>
-                <p className="text-[14px]">{blog.description.length >= 7 ? blog.description.split(" ").slice(0, 7).join(" ") : blog.description}</p>
+                <p className="text-[14px]">{blog.description.length >= 7 ? `${blog.description.split(" ").slice(0, 7).join(" ")}...` : blog.description}</p>
             </div>
             <ul className="flex gap-x-2 gap-y-2 flex-wrap">
                 {
                     blog?.genre?.map(gen => (
-                        <li key={gen} className="text-[13px] font-semibold border-solid border-2 rounded-full border-slate-500  px-2">{gen}</li>
+                        <li key={gen} className="text-[13px] font-semibold border-solid border-2 rounded-full border-teal-300 hover:bg-teal-500  px-2">{gen}</li>
                     ))
                 }
             </ul>

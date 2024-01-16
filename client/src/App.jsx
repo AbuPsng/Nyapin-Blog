@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <BlogListsPage />
   },
   {
-    path: "/blog_details",
+    path: "/blog_details/:blogId",
     element: <BlogDetailsPage />
   },
   {
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     element: <BlogCreatePage />
   },
   {
-    path: "/update_blog",
+    path: "/update_blog/:blogId",
     element: <BlogUpdatePage />
   },
 ]);

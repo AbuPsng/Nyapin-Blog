@@ -47,9 +47,9 @@ const BlogCreatePage = () => {
 
     return (
         <Template>
-            <main className='h-screen flex justify-center items-center'>
+            <main className=' flex justify-center items-center'>
                 {isLoading && <ShowModel message={"Uploading..."} />}
-                <div className='w-full h-full py-14 px-8 '>
+                <div className='w-full  py-14 px-8 '>
                     <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-10'>
                         <div className='flex gap-x-5 items-center'>
                             <p className='text-lg '>Title :</p>
