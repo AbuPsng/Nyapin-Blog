@@ -12,8 +12,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const { user, setUser } = useUser()
-
+    const { user, setUser, isUserExist } = useUser()
 
     //**Login function */
 
@@ -26,6 +25,7 @@ const LoginPage = () => {
             setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage })
 
             localStorage.setItem("user", JSON.stringify({ ...data, password: null }))
+            isUserExist()
             alert(`Welcome ${data.name}`)
             navigate("/")
         } catch (error) {

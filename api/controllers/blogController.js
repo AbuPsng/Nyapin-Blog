@@ -91,3 +91,10 @@ export const deleteBlog = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({ status: "success", message: "Blog deleted successfully", data: deleteBlog })
 })
+
+export const sortBlog = asyncHandler(async (req, res) => {
+    const allBlog = await blogModel.find()
+    const sortBlog = allBlog.sort({ title: 1 })
+    res.status(200).json({ status: "success", message: "Blog updated successfully", data: sortBlog })
+
+})

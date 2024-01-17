@@ -1,12 +1,10 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useUser } from "../utils/useUser";
 
 export const BlogContext = createContext()
 
 export const BlogProvider = ({ children }) => {
 
-    const { user } = useUser()
     const [blogs, setBlogs] = useState([])
     const [blog, setBlog] = useState({
         title: "",
@@ -34,7 +32,7 @@ export const BlogProvider = ({ children }) => {
 
     useEffect(() => {
         getAllBlogs()
-    }, [user])
+    }, [])
 
     const handleDeleteBlog = async (blogId) => {
         try {
@@ -63,7 +61,7 @@ export const BlogProvider = ({ children }) => {
     }
 
     return (
-        <BlogContext.Provider value={{ blogs, setBlogs, blog, handleDeleteBlog, isLoading, handleGetSingleBlog, setBlog }}>
+        <BlogContext.Provider value={{ blogs, setBlogs, blog, handleDeleteBlog, isLoading, getAllBlogs, handleGetSingleBlog, setBlog }}>
             {children}
         </BlogContext.Provider>
     )

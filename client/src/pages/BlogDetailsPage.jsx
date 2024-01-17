@@ -3,6 +3,7 @@ import Template from "../components/Template"
 import { useBlog } from "../utils/useBlogs"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useUser } from "../utils/useUser"
+import Filter from "../components/Filter"
 
 const BlogDetailsPage = () => {
 

@@ -3,6 +3,7 @@ import Template from '../components/Template'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import ShowModel from '../components/ShowModel'
+import { useBlog } from '../utils/useBlogs'
 
 const genres = ["nature", "sea", "technology", "mobile", "bird", "place", "hometown", "country", "forest", "animal", "space"]
 
@@ -11,6 +12,8 @@ const BlogCreatePage = () => {
     const [description, setDescription] = useState("")
     const [coverImage, setCoverImage] = useState(null)
     const [genre, setGenre] = useState([])
+
+    const { getAllBlogs } = useBlog()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -37,11 +40,13 @@ const BlogCreatePage = () => {
             formData.append("genre", genre)
             const response = await axios.post("/blogs/create_blog", formData, { withCredentials: true })
             alert(response.data.message)
+            getAllBlogs()
             navigate("/blog_lists")
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
-            alert(error.response.data.message)
+            alert(error.data.message)
+            console.log(error)
         }
     }
 
