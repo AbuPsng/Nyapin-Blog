@@ -16,8 +16,7 @@ export const updateMe = expressAsyncHandler(async (req, res, next) => {
 })
 
 export const getMe = expressAsyncHandler(async (req, res, next) => {
-    const existUser = await userModel.findById(req.user.userId)
-
+    const existUser = await userModel.findById(req.user.id)
     if (!existUser) return next(new Error("Please Login"))
 
     res.status(200).json({ status: "success", message: "Your profile has been displayed successfully", data: existUser })

@@ -21,12 +21,17 @@ export const AuthProvider = ({ children }) => {
         isUserExist()
     }, [])
 
-    //** */ logout function
-
-
+    const handleUpdateProfile = async (e) => {
+        e.preventDefault()
+        try {
+            console.log("hero")
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
-        <AuthContext.Provider value={{ user, setUser, isUserExist }}>
+        <AuthContext.Provider value={{ user, setUser, isUserExist, handleUpdateProfile }}>
             {children}
         </AuthContext.Provider>
     )
