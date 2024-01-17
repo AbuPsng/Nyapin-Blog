@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
 import { useUser } from "../utils/useUser"
 import axios from "axios"
+import { useState } from "react"
 
 const pageLinks = [
     { name: "Home", link: "/" },

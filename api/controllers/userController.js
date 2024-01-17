@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler"
 import userModel from "../models/userModel.js"
+import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
 export const getAllUser = expressAsyncHandler(async (req, res) => {
     const users = await userModel.find()
@@ -7,7 +8,10 @@ export const getAllUser = expressAsyncHandler(async (req, res) => {
 })
 
 export const updateMe = expressAsyncHandler(async (req, res, next) => {
-    const updatedUser = await userModel.findByIdAndUpdate(req.user.userId, { $set: { profileImage: req.file.filename, ...req.body } }, { new: true })
+
+    const cloudinary_image = await uploadOnCloudinary(req.file?.path)
+
+    const updatedUser = await userModel.findByIdAndUpdate(req.user.id, { ...req.body, profileImage: cloudinary_image || req.body }, { new: true })
 
     if (!updatedUser) return next(new Error("Please login first ."))
     console.log(updatedUser)
