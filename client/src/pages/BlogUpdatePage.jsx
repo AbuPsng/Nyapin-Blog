@@ -46,6 +46,7 @@ const BlogUpdatePage = () => {
             const response = await axios.patch(`/blogs/${blog._id}`, formData, { withCredentials: true })
             alert(response.data.message)
             navigate(`/blog_details/${blog._id}`)
+            setCoverImage(null)
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)
