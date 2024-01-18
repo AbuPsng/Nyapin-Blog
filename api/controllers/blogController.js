@@ -32,7 +32,7 @@ export const getMyBlogs = asyncHandler(async (req, res, next) => {
 export const getSingleBlog = asyncHandler(async (req, res, next) => {
 
     const blog = await blogModel.findById(req.params.blogId).populate({
-        path: "author", select: "name email"
+        path: "author", select: "name email profileImage"
     }).populate({ path: "review", select: " -updatedAt" })
 
     if (!blog) return res.status(404).json({ status: "success", message: "No blog to shows" })

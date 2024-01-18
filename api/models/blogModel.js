@@ -33,10 +33,12 @@ const blogSchema = new mongoose.Schema({
         ref: "User",
         require: true
     }
-}, {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
-})
+},
+    { timestamps: true },
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+    })
 
 blogSchema.virtual("review", {
     ref: "Review",

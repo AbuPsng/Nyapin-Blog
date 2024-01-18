@@ -10,7 +10,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import BlogCreatePage from "./pages/BlogCreatePage";
 import BlogUpdatePage from "./pages/BlogUpdatePage";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1"
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 axios.defaults.withCredentials = true
 
 const router = createBrowserRouter([

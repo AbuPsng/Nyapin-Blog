@@ -19,7 +19,7 @@ const BlogContainer = ({ blog }) => {
             }
 
             {
-                user?.userId === blog?.author ?
+                user?.userId === blog?.author || import.meta.env.VITE_ADMIN1 ?
                     <div className="absolute right-0 top-4 rounded-lg " >
                         <Link to={`/update_blog/${blog._id}`}>
                             <button className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3 "><FaEdit /></button>
@@ -37,7 +37,6 @@ const BlogContainer = ({ blog }) => {
 
             <img src={`${blog.coverImage}`} className="h-44 w-full object-cover" alt="near lake" />
             <div className="flex flex-col gap-y-1">
-                <p className="text-[13px] font-semibold">{blog.author} - 02 Jan 2022</p>
                 <h3 className="text-lg font-semibold">{blog.title.length >= 3 ? blog.title.split(" ").slice(0, 3).join(" ") : blog.title}</h3>
                 <p className="text-[14px]">{blog.description.length >= 7 ? `${blog.description.split(" ").slice(0, 7).join(" ")}...` : blog.description}</p>
             </div>

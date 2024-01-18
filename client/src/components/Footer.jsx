@@ -5,7 +5,7 @@ const one = ["Product", "Overview", "Features", "Solutions"]
 const Footer = () => {
     return (
         <footer className="w-full bg-gradient-to-b from-blue-400 to-teal-400 pt-20 pb-10 flex justify-center px-3 md:px-0">
-            <div className="mx-auto w-full max-w-[1200x] flex flex-col gap-y-12 md:px-10 ">
+            <div className="mx-auto w-full max-w-6xl flex flex-col gap-y-12 md:px-10 ">
 
                 {/* Description container */}
                 <div className="flex flex-col justify-center items-center gap-y-3">

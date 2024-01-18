@@ -49,16 +49,16 @@ const UserDetailsPage = () => {
                 {
                     isLoading ? <ShowModel message={"Wait...Updating your profile"} />
                         :
-                        <form onSubmit={handleUpdateUser} className="h-screen  items-center flex pt-8 gap-y-12  flex-col  w-full" >
+                        <form onSubmit={handleUpdateUser} className="h-screen  items-center flex pt-6 gap-y-12  flex-col  w-full" >
 
                             {
                                 newUserImage ? (
                                     <>
-                                        <img src={URL.createObjectURL(newUserImage)} alt="product_coverImage" className="h-1/3 w-1/3 rounded-full" />
+                                        <img src={URL.createObjectURL(newUserImage)} alt="product_coverImage" className="h-64 w-1/3 object-cover rounded-full" />
                                     </>
                                 ) : (
                                     <>
-                                        <img src={`${(user?.profileImage)}`} alt={`${user?.name}-image`} className="h-1/3 w-1/3 rounded-full" />
+                                        <img src={`${(user?.profileImage)}`} alt={`${user?.name}-image`} className="h-64 w-1/3 object-cover rounded-full" />
                                     </>
                                 )
                             }

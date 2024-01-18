@@ -3,7 +3,6 @@ import BlogContainer from "../components/BlogContainer"
 import { useState } from "react"
 import { IoFilterSharp } from "react-icons/io5";
 import { IoAddOutline } from "react-icons/io5";
-import axios from "axios"
 import { Link } from "react-router-dom";
 import ShowModel from '../components/ShowModel'
 import { useBlog } from "../utils/useBlogs";
