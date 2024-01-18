@@ -9,6 +9,7 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    // const [isLoading]
 
     const navigate = useNavigate()
 
@@ -22,7 +23,7 @@ const LoginPage = () => {
             const response = await axios.post("/sign_in", { email, password })
             const data = response.data.data
 
-            setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage })
+            setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage, phone: data.phone, address: data.address })
 
             localStorage.setItem("user", JSON.stringify({ ...data, password: null }))
             isUserExist()
@@ -31,7 +32,6 @@ const LoginPage = () => {
         } catch (error) {
             alert(error.response.data.message)
             console.log(error.message)
-            console.log(error)
         }
     }
 

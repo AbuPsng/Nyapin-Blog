@@ -39,7 +39,9 @@ export const sign_in = asyncHandler(async (req, res, next) => {
             name: existUser.name,
             email: existUser.email,
             userId: existUser._id,
-            profileImage: existUser.profileImage
+            profileImage: existUser.profileImage,
+            phone: existUser.phone,
+            address: existUser.address,
         }
     })
 })

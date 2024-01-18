@@ -11,6 +11,8 @@ export const updateMe = expressAsyncHandler(async (req, res, next) => {
 
     const cloudinary_image = await uploadOnCloudinary(req.file?.path)
 
+    console.log(req.body)
+
     const updatedUser = await userModel.findByIdAndUpdate(req.user.id, { ...req.body, profileImage: cloudinary_image || req.body }, { new: true })
 
     if (!updatedUser) return next(new Error("Please login first ."))
