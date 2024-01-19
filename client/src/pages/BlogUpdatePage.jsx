@@ -17,7 +17,7 @@ const BlogUpdatePage = () => {
     const { blogId } = useParams()
     const navigate = useNavigate()
 
-    const { handleGetSingleBlog, blog, setBlog } = useBlog()
+    const { handleGetSingleBlog, blog, setBlog, getAllBlogs } = useBlog()
 
     useEffect(() => {
         handleGetSingleBlog(blogId)
@@ -31,6 +31,7 @@ const BlogUpdatePage = () => {
     const handleDisSelect = (g) => {
         if (!genre.includes(g)) return
         setGenre([...genre.filter(gen => gen !== g)])
+        blog.genre = blog.genre.filter(gen => gen !== g)
     }
 
     const handleSubmit = async (e) => {
@@ -40,12 +41,13 @@ const BlogUpdatePage = () => {
             const formData = new FormData();
             formData.append("title", blog.title)
             formData.append("description", blog.description)
-            formData.append("file", blog.coverImage)
+            formData.append("file", coverImage)
             formData.append("genre", blog.genre)
             console.log(formData)
             const response = await axios.patch(`/blogs/${blog._id}`, formData, { withCredentials: true })
             alert(response.data.message)
             navigate(`/blog_details/${blog._id}`)
+            getAllBlogs()
             setCoverImage(null)
             setIsLoading(false)
         } catch (error) {
@@ -54,6 +56,7 @@ const BlogUpdatePage = () => {
         }
     }
 
+    console.log(coverImage)
 
     return (
         <Template>
@@ -72,7 +75,7 @@ const BlogUpdatePage = () => {
                         </div>
 
                         <div className='flex gap-x-5 py-10  gap-y-10 items-center'>
-                            <input type="file" onChange={(e) => setBlog({ ...blog, coverImage: e.target.files[0] })} className='w-1/3 bg-teal-100   text-sm  rounded-md px-4  py-2' />
+                            <input type="file" onChange={(e) => setCoverImage(e.target.files[0])} className='w-1/3 bg-teal-100   text-sm  rounded-md px-4  py-2' />
                             <div className="flex flex-col w-full justify-center">
                                 {
                                     coverImage ? (
@@ -93,7 +96,7 @@ const BlogUpdatePage = () => {
                             <div className='flex gap-x-3 gap-y-2 flex-wrap'>
                                 {
                                     genres.map(g => (
-                                        genre.includes(g) || blog.genre.includes(g) ?
+                                        genre.includes(g) || blog?.genre.includes(g) ?
                                             <button type="button" onClick={() => handleDisSelect(g)} className='px-3 py-1 rounded-full bg-teal-400 ' key={g}>{g}</button>
                                             :
                                             <button type="button" onClick={() => handleSelected(g)} className='px-3 py-1 bg-teal-100 rounded-full hover:bg-teal-200 ' key={g}>{g}</button>

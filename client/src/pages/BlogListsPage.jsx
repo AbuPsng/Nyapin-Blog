@@ -7,21 +7,37 @@ import { Link } from "react-router-dom";
 import ShowModel from '../components/ShowModel'
 import { useBlog } from "../utils/useBlogs";
 import Filter from "../components/Filter";
+import axios from "axios";
 
 const BlogListsPage = () => {
 
-    const [search, setSearch] = useState("")
-
+    const [searchTerm, setSearchTerm] = useState("")
+    const [searchBlogs, setSearchBlogs] = useState([])
     const [sortBy, setSortBy] = useState(false)
 
     const { blogs, isLoading, handleDeleteBlog } = useBlog()
 
+    const handleSearch = async (e) => {
+        e.preventDefault()
+        try {
+            setSearchBlogs([])
+            const response = await axios.get(`/blogs/search/?term=${searchTerm}`)
+            const data = response.data.data
+            console.log(response)
+            console.log(data)
+            setSearchBlogs(data)
+            setSearchTerm("")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    console.log(searchBlogs)
     return (
         <Template>
             <main className="w-full flex flex-wrap gap justify-center items-center py-24">
                 <form className="flex gap-x-6 w-full justify-center pb-16" >
-                    <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} className="w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
-                    <button className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md md:py-2 md:px-8 ">Search</button>
+                    <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
+                    <button type="submit" onClick={handleSearch} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md md:py-2 md:px-8 ">Search</button>
                     <div className="h-full flex gap-x-1 relative">
                         <Link to="/create_blog">
                             <button className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 md:px-3"><IoAddOutline />
@@ -42,11 +58,16 @@ const BlogListsPage = () => {
                         :
                         <div className="flex w-full gap-x-10 gap-y-6 justify-center items-start flex-wrap">
                             {
-                                blogs?.map(blog => (
+                                searchBlogs.length > 0 ? searchBlogs?.map(blog => (
                                     <div key={blog._id} className="w-full md:w-5/12 lg:w-1/4">
                                         < BlogContainer blog={blog} handleDelete={handleDeleteBlog} />
-                                    </div>
-                                ))
+                                    </div>))
+                                    :
+                                    blogs?.map(blog => (
+                                        <div key={blog._id} className="w-full md:w-5/12 lg:w-1/4">
+                                            < BlogContainer blog={blog} handleDelete={handleDeleteBlog} />
+                                        </div>
+                                    ))
                             }
                         </div>
                 }

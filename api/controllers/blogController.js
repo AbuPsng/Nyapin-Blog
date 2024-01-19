@@ -66,16 +66,24 @@ export const createBlog = asyncHandler(async (req, res, next) => {
 
 export const updateBlog = asyncHandler(async (req, res, next) => {
 
-    console.log("update blog body", req.body)
-    console.log("update blog id ", req.params.blogId)
+    const { title, description, genre } = req.body
+    const newGenre = genre.split(",")
 
-    const updatedBlog = await blogModel.findByIdAndUpdate(req.params.blogId, req.body, { new: true })
+    console.log(req.file?.path)
+
+    if (req.file?.path) {
+        const blogCoverImageUrl = await uploadOnCloudinary(req.file?.path)
+        const updatedBlog = await blogModel.findByIdAndUpdate(req.params.blogId, { title, description, genre: newGenre, coverImage: blogCoverImageUrl }, { new: true })
+        return res.status(200).json({ status: "success", message: "Blog updated successfully", data: updatedBlog })
+    }
+
+    const updatedBlog = await blogModel.findByIdAndUpdate(req.params.blogId, { title, description, genre: newGenre }, { new: true })
 
     if (!updatedBlog) {
         return res.status(404).json({ error: 'Blog not found' });
     }
 
-    console.log("update blog", updateBlog)
+    console.log("update blog", updatedBlog)
 
     res.status(200).json({ status: "success", message: "Blog updated successfully", data: updatedBlog })
 })
@@ -92,9 +100,32 @@ export const deleteBlog = asyncHandler(async (req, res, next) => {
     res.status(200).json({ status: "success", message: "Blog deleted successfully", data: deleteBlog })
 })
 
-export const sortBlog = asyncHandler(async (req, res) => {
-    const allBlog = await blogModel.find()
-    const sortBlog = allBlog.sort({ title: 1 })
-    res.status(200).json({ status: "success", message: "Blog updated successfully", data: sortBlog })
+//** Search Blog by term */
+
+export const searchBlogByTitleOrDescription = asyncHandler(async (req, res) => {
+
+    const searchTerm = req.query.term
+
+    const query = {
+        $or: [
+            { title: { $regex: new RegExp(searchTerm, 'i') } },
+            { description: { $regex: new RegExp(searchTerm, 'i') } }
+        ]
+    };
+
+    const searchBlogs = await blogModel.find(query)
+    console.log(searchBlogs)
+
+    // const searchBlogs = await blogModel.find(req.query)
+    res.status(200).json({ status: "success", message: "Your Search Blogs", data: searchBlogs })
+
+})
+
+export const sortBlogs = asyncHandler(async (req, res) => {
+    const sortBlogs = await blogModel.find()
+
+    console.log(sortBlogs)
+
+    res.status(200).json({ status: "success", message: "Your Sort Blogs", data: sortBlogs })
 
 })

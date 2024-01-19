@@ -19,7 +19,7 @@ const BlogContainer = ({ blog }) => {
             }
 
             {
-                user?.userId === blog?.author || import.meta.env.VITE_ADMIN1 ?
+                user?.userId === blog?.author || user?.userId === import.meta.env.VITE_ADMIN1 ?
                     <div className="absolute right-0 top-4 rounded-lg " >
                         <Link to={`/update_blog/${blog._id}`}>
                             <button className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3 "><FaEdit /></button>

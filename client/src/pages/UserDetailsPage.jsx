@@ -12,8 +12,6 @@ const UserDetailsPage = () => {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    console.log(user)
-
     const handleUpdateUser = async (e) => {
         e.preventDefault()
         setIsLoading(true)

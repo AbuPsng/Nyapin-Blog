@@ -32,7 +32,7 @@ const BlogDetailsPage = () => {
                             <div className="pt-20 pb-12 w-full flex flex-col gap-y-14">
                                 <img className="w-full h-96 object-cover" src={`${blog?.coverImage}`} alt="" />
                                 <div className="relative">
-                                    {blog?.author?._id === user?.userId && <div className="absolute right-2 top-2 ">
+                                    {blog?.author?._id === user?.userId || user?.userId === import.meta.env.VITE_ADMIN1 && <div className="absolute right-2 top-2 ">
                                         <Link to={`/update_blog/${blogId}`}> <button className="py-2 px-7 rounded-md mr-4 bg-teal-200 hover:bg-teal-400">edit</button></Link>
                                         <button onClick={() => setIsDelete(!isDelete)} className="py-2 px-7 rounded-md bg-red-200 hover:bg-red-400">delete</button>
                                     </div>}
