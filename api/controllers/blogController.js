@@ -116,6 +116,8 @@ export const sortBlogs = asyncHandler(async (req, res) => {
 
     const { sortBy, order } = req.query
 
+    console.log(req.query)
+
     const newOrder = +order
 
     const sortByQuery = {
@@ -123,6 +125,7 @@ export const sortBlogs = asyncHandler(async (req, res) => {
     }
 
     const sortedBlogs = await blogModel.find().sort(sortByQuery);
+    console.log("sort", sortedBlogs)
     res.status(200).json({ status: "success", message: "Your Sort Blogs", data: sortedBlogs })
 
 })

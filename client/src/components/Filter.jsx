@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 const sortByList = [
     { options: "A - Z", sortBy: "title", order: 1, delay: 0 },
     { options: "Z - A", sortBy: "title", order: -1, delay: 0.2 },
-    { options: "Latest", sortBy: "createdAt", order: 1, delay: 0.4 },
+    { options: "Latest", sortBy: "createdAt", order: -1, delay: 0.4 },
     { options: "Oldest", sortBy: "createdAt", order: 1, delay: 0.6 },
 ]
 
@@ -27,7 +27,7 @@ const Filter = ({ handleSort }) => {
                             visible: { opacity: 1, x: 0 }
                         }}
                     >
-                        <button type="button" onClick={() => handleSort(sort.sortBy, sort.order)} >{sort.options}</button>
+                        <button type="button" className="h-full w-full" onClick={() => handleSort(sort.sortBy, sort.order)} >{sort.options}</button>
                     </motion.div>
                 ))
             }
