@@ -18,7 +18,7 @@ export const getAllBlog = asyncHandler(async (req, res, next) => {
 
 export const getMyBlogs = asyncHandler(async (req, res, next) => {
 
-    const blogs = await blogModel.find({ author: req.user.userId })
+    const blogs = await blogModel.find({ author: req.user.id })
 
     if (!blogs) return res.status(404).json({ status: "success", message: "No blogs to shows" })
 
