@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import ShowModel from '../components/ShowModel'
 import { useBlog } from '../utils/useBlogs'
 
-const genres = ["nature", "sea", "technology", "mobile", "bird", "place", "hometown", "country", "forest", "animal", "space"]
+const genres = ["nature", "sea", "technology", "anime", "wallpaper", "cars", "luxury", "mobile", "bird", "place", "hometown", "country", "forest", "animal", "space"]
 
 const BlogCreatePage = () => {
     const [title, setTitle] = useState("")

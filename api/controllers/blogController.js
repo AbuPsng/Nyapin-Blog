@@ -7,7 +7,6 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"
 //*** Get all blogs */
 
 export const getAllBlog = asyncHandler(async (req, res, next) => {
-
     const blogs = await blogModel.find()
 
     if (!blogs) return res.status(404).json({ status: "success", message: "No blogs to shows" })
@@ -18,7 +17,6 @@ export const getAllBlog = asyncHandler(async (req, res, next) => {
 //*** Get all my blog */
 
 export const getMyBlogs = asyncHandler(async (req, res, next) => {
-    console.log(req.user.userId)
 
     const blogs = await blogModel.find({ author: req.user.userId })
 
@@ -69,8 +67,6 @@ export const updateBlog = asyncHandler(async (req, res, next) => {
     const { title, description, genre } = req.body
     const newGenre = genre.split(",")
 
-    console.log(req.file?.path)
-
     if (req.file?.path) {
         const blogCoverImageUrl = await uploadOnCloudinary(req.file?.path)
         const updatedBlog = await blogModel.findByIdAndUpdate(req.params.blogId, { title, description, genre: newGenre, coverImage: blogCoverImageUrl }, { new: true })
@@ -82,8 +78,6 @@ export const updateBlog = asyncHandler(async (req, res, next) => {
     if (!updatedBlog) {
         return res.status(404).json({ error: 'Blog not found' });
     }
-
-    console.log("update blog", updatedBlog)
 
     res.status(200).json({ status: "success", message: "Blog updated successfully", data: updatedBlog })
 })
@@ -102,30 +96,33 @@ export const deleteBlog = asyncHandler(async (req, res, next) => {
 
 //** Search Blog by term */
 
-export const searchBlogByTitleOrDescription = asyncHandler(async (req, res) => {
+export const searchByTerm = asyncHandler(async (req, res, next) => {
 
-    const searchTerm = req.query.term
+    const searchTerm = req.query.searchTerm
 
-    const query = {
+    const searchedBlogs = await blogModel.find({
         $or: [
-            { title: { $regex: new RegExp(searchTerm, 'i') } },
-            { description: { $regex: new RegExp(searchTerm, 'i') } }
-        ]
-    };
+            { title: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search for the title
+            { description: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search for the description
+        ],
+    });
 
-    const searchBlogs = await blogModel.find(query)
-    console.log(searchBlogs)
+    if (!searchedBlogs) return res.status(404).json({ status: "success", message: "No blogs to shows" })
 
-    // const searchBlogs = await blogModel.find(req.query)
-    res.status(200).json({ status: "success", message: "Your Search Blogs", data: searchBlogs })
-
+    res.status(200).json({ status: "success", results: searchedBlogs.length, message: "All blogs displayed successfully", data: searchedBlogs })
 })
 
 export const sortBlogs = asyncHandler(async (req, res) => {
-    const sortBlogs = await blogModel.find()
 
-    console.log(sortBlogs)
+    const { sortBy, order } = req.query
 
-    res.status(200).json({ status: "success", message: "Your Sort Blogs", data: sortBlogs })
+    const newOrder = +order
+
+    const sortByQuery = {
+        [sortBy]: newOrder
+    }
+
+    const sortedBlogs = await blogModel.find().sort(sortByQuery);
+    res.status(200).json({ status: "success", message: "Your Sort Blogs", data: sortedBlogs })
 
 })

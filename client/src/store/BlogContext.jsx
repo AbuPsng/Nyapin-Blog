@@ -53,7 +53,6 @@ export const BlogProvider = ({ children }) => {
             const data = response.data.data
             setBlog({ ...data })
             setIsLoading(false)
-            console.log(response.data)
         } catch (error) {
             console.log(error)
             setIsLoading(false)

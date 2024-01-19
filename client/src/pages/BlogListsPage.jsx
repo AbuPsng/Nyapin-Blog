@@ -21,23 +21,35 @@ const BlogListsPage = () => {
         e.preventDefault()
         try {
             setSearchBlogs([])
-            const response = await axios.get(`/blogs/search/?term=${searchTerm}`)
+            const response = await axios.get(`/blogs/search/?searchTerm=${searchTerm}`)
             const data = response.data.data
-            console.log(response)
-            console.log(data)
             setSearchBlogs(data)
             setSearchTerm("")
         } catch (error) {
             console.log(error)
         }
     }
-    console.log(searchBlogs)
+
+    const handleSort = async (sortBy, order) => {
+        try {
+            setSearchBlogs([])
+            const response = await axios.get(`/blogs/sorted/?sortBy=${sortBy}&order=${order}`)
+            const data = response.data.data
+            setSearchBlogs(data)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Template>
             <main className="w-full flex flex-wrap gap justify-center items-center py-24">
-                <form className="flex gap-x-6 w-full justify-center pb-16" >
-                    <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
-                    <button type="submit" onClick={handleSearch} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md md:py-2 md:px-8 ">Search</button>
+                <div className="flex  w-full justify-start  items-center pb-16">
+                    <form className="flex gap-x-6 justify-center w-10/12" >
+                        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
+                        <button type="submit" onClick={handleSearch} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md md:py-2 md:px-8 ">Search</button>
+                    </form>
                     <div className="h-full flex gap-x-1 relative">
                         <Link to="/create_blog">
                             <button className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 md:px-3"><IoAddOutline />
@@ -47,12 +59,12 @@ const BlogListsPage = () => {
                         </button>
                         {
                             sortBy &&
-                            <div className="absolute z-50 right-0 top-10 py-4" >
-                                <Filter />
+                            <div className="absolute z-10 right-0 top-10 py-4" >
+                                <Filter handleSort={handleSort} />
                             </div>
                         }
                     </div>
-                </form>
+                </div>
                 {
                     isLoading ? <ShowModel message="Loading.." />
                         :

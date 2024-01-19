@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const pageLinks = [
     { name: "Home", link: "/" },
-    { name: "Blogs", link: "/blog_lists" },
+    { name: "Blogs", link: "/blog_lists" }
 ]
 
 const authLinks = [
@@ -48,6 +48,9 @@ const Navbar = () => {
                             pageLinks.map(links => (
                                 <Link to={links.link} key={links.name} className="px-3 py-2 hidden hover:text-gray-600 md:flex" >{links.name}</Link>
                             ))
+                        }
+                        {
+                            user && <Link to="my_blogs" className="px-3 py-2 hidden hover:text-gray-600 md:flex">My Blogs</Link>
                         }
                         {
                             user?.userId === import.meta.env.VITE_ADMIN1 && <Link to="/all_users" className="px-3 py-2 hidden hover:text-gray-600 md:flex" >All Users</Link>
