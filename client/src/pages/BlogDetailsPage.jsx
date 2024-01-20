@@ -57,7 +57,6 @@ const BlogDetailsPage = () => {
 
 
                             <ReviewSection blogId={blogId} />
-                            <button className="px-7 py-2 w-1/5 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
                         </>
                 }
             </main>
