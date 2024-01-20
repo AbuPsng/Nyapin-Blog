@@ -4,6 +4,7 @@ import { useBlog } from "../utils/useBlogs"
 import { Link, useParams } from "react-router-dom"
 import { useUser } from "../utils/useUser"
 import DeleteModel from "../components/DeleteModel"
+import ReviewSection from "../sections/ReviewSection"
 
 const BlogDetailsPage = () => {
 
@@ -15,8 +16,6 @@ const BlogDetailsPage = () => {
     const { handleGetSingleBlog, blog } = useBlog()
 
     const date = (blog?.createdAt ? new Date(blog?.createdAt).toDateString() : "Not Available")
-
-    console.log(user?.userId === import.meta.env.VITE_ADMIN1)
 
     useEffect(() => {
         handleGetSingleBlog(blogId)
@@ -57,32 +56,7 @@ const BlogDetailsPage = () => {
                             </div>
 
 
-                            <div className="flex w-full overflow-x-auto rounded-md bg-teal-100 px-10 py-6 gap-x-4" >
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                                <div className=" flex flex-none flex-col px-2 py-2 gap-y-3 w-1/4 rounded-lg text-sm bg-white" >
-                                    <h3 className="text-sm font-semibold">Ani</h3>
-                                    <p>It was a very wonderful blog written with such style that it make you feel as you have been there</p>
-                                </div>
-                            </div>
+                            <ReviewSection blogId={blogId} />
                             <button className="px-7 py-2 w-1/5 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
                         </>
                 }

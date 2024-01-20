@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import BlogCreatePage from "./pages/BlogCreatePage";
 import BlogUpdatePage from "./pages/BlogUpdatePage";
+import MyBlogPage from "./pages/MyBlogPage";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 axios.defaults.withCredentials = true
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/update_blog/:blogId",
     element: <BlogUpdatePage />
+  },
+  {
+    path: "/my_blogs",
+    element: <MyBlogPage />
   },
 ]);
 
