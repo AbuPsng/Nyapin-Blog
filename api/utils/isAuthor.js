@@ -41,15 +41,18 @@ export const isAuthor = expressAsyncHandler(async (req, res, next) => {
 
 export const isCommenter = expressAsyncHandler(async (req, res, next) => {
     const { reviewId } = req.params
-    const user = req.user.userId
+    const user = req.user.id
 
     const commenter = await userModel.findById(user)
 
     const review = await reviewModel.findById(reviewId)
 
     console.log(review)
+    console.log(review.user)
+    console.log(commenter)
+    console.log(user)
 
-    if (review.user.toString() !== user && commenter.role !== 1) return next(new Error("You are not the commenter"))
+    if (review.user.toString() !== user && commenter.role !== 1) return next(new Error("This is not your comment"))
 
     next()
 

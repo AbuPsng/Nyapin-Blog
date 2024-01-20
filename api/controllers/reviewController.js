@@ -24,10 +24,6 @@ export const createReview = asyncHandler(async (req, res, next) => {
     const { review } = req.body
     const { blogId } = req.params
     const userId = req.user.id
-
-    console.log(req.user)
-    console.log(userId)
-
     const newReview = await reviewModel.create({ review, blog: blogId, user: userId })
 
     res.status(200).json({ status: "success", message: "Review created successfully", data: newReview })
@@ -50,6 +46,9 @@ export const updateReview = asyncHandler(async (req, res, next) => {
 //*** Delete Review */
 
 export const deleteReview = asyncHandler(async (req, res, next) => {
+
+    console.log(req.user.id)
+    console.log(req.params)
 
     const deleteReview = await reviewModel.findByIdAndDelete(req.params.reviewId)
 
