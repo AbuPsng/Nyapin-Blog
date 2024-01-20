@@ -8,7 +8,9 @@ import { isExist, isNotExist } from "../utils/checkExist.js"
 
 export const getAllReview = asyncHandler(async (req, res, next) => {
 
-    const Review = await reviewModel.find({ blog: req.params.blogId })
+    const Review = await reviewModel.find({ blog: req.params.blogId }).populate({
+        path: "user", select: "name profileImage"
+    })
 
     if (!Review) return res.status(404).json({ status: "success", message: "No Review to shows" })
 
@@ -21,7 +23,10 @@ export const createReview = asyncHandler(async (req, res, next) => {
 
     const { review } = req.body
     const { blogId } = req.params
-    const userId = req.user.userId
+    const userId = req.user.id
+
+    console.log(req.user)
+    console.log(userId)
 
     const newReview = await reviewModel.create({ review, blog: blogId, user: userId })
 

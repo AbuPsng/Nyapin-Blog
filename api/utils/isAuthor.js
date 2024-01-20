@@ -29,10 +29,9 @@ export const isAuthor = expressAsyncHandler(async (req, res, next) => {
     console.log(author.role)
 
     const blog = await blogModel.findById(blogId)
-    console.log(blog.author)
-    console.log(user)
+    console.log(blog)
 
-    if (blog.author.toString() !== user && author.role !== 1) return next(new Error("You are not the owner"))
+    if (blog?.author?.toString() !== user && author.role !== 1) return next(new Error("You are not the owner"))
 
     next()
 
@@ -47,6 +46,8 @@ export const isCommenter = expressAsyncHandler(async (req, res, next) => {
     const commenter = await userModel.findById(user)
 
     const review = await reviewModel.findById(reviewId)
+
+    console.log(review)
 
     if (review.user.toString() !== user && commenter.role !== 1) return next(new Error("You are not the commenter"))
 
