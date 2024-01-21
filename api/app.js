@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 router.use(cors({
     credentials: true,
-    origin: "https://nyapin-blog.vercel.app/"
+    origin: "https://nyapin-blog.vercel.app"
 }))
 
 app.use(express.static('public'));
