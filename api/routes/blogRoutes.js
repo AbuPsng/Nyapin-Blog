@@ -7,10 +7,10 @@ import { upload } from "../utils/multer.js"
 
 const router = express.Router()
 
-router.use(cors({
-    credentials: true,
-    origin: "http://localhost:5173"
-}))
+// router.use(cors({
+//     credentials: true,
+//     origin: "https://nyapin-blog.vercel.app/"
+// }))
 
 router.get("/", getAllBlog)
 router.get("/search", searchByTerm)

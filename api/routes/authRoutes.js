@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.use(cors({
     credentials: true,
-    origin: "http://localhost:5173"
+    origin: "https://nyapin-blog.vercel.app/"
 }))
 
 router.post("/sign_up", upload.single("file"), sign_up)
