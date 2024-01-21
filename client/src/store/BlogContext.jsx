@@ -20,7 +20,7 @@ export const BlogProvider = ({ children }) => {
     const getAllBlogs = async () => {
         setIsLoading(true)
         try {
-            const response = await axios.get("/blogs")
+            const response = await axios.get("/api/v1/blogs")
             const data = response.data.data
             setIsLoading(false)
             setBlogs([...data])
