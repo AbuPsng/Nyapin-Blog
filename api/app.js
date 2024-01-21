@@ -10,7 +10,7 @@ import blogRouter from "./routes/blogRoutes.js"
 import reviewRouter from "./routes/reviewRoutes.js"
 import adminRouter from "./routes/adminRoutes.js"
 import { test } from "./utils/authentication.js"
-const router = express.Router()
+// const router = express.Router()
 
 dotenv.config()
 
@@ -20,7 +20,7 @@ connectDB()
 app.use(express.json())
 app.use(cookieParser())
 
-router.use(cors({
+app.use(cors({
     credentials: true,
     origin: "https://nyapin-blog.vercel.app"
 }))
