@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.use(cors({
     credentials: true,
-    origin: "https://nyapin-blog.vercel.app/"
+    origin: "https://nyapin-blog.vercel.app"
 }))
 
 router.get("/", getAllBlog)
