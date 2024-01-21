@@ -16,11 +16,13 @@ router.get("/", getAllBlog)
 router.get("/search", searchByTerm)
 router.get("/sorted", sortBlogs)
 
+router.route("/:blogId").get(getSingleBlog)
+
 router.get("/my_blogs", isSignIn, getMyBlogs)
 
 router.post("/create_blog", isSignIn, upload.single("file"), createBlog)
 
-router.route("/:blogId").get(getSingleBlog).patch(isSignIn, isAuthor, upload.single("file"), updateBlog).delete(isSignIn, isAuthor, deleteBlog)
+router.route("/:blogId").patch(isSignIn, isAuthor, upload.single("file"), updateBlog).delete(isSignIn, isAuthor, deleteBlog)
 
 
 
