@@ -42,21 +42,21 @@ const RegisterPage = () => {
         <Template>
             <main className="h-screen flex justify-center items-center">
                 {isLoading && <ShowModel message='Loading....' />}
-                <form onSubmit={handleRegister} className="bg-gradient-to-t from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-4 p-12">
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your name" />
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
+                <form onSubmit={handleRegister} className="bg-gradient-to-t w-full from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-4 p-12">
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your name" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
                     <div className=" w-full flex justify-center">
                         {
                             profileImage && (
                                 <div className="text-center">
-                                    <img src={URL.createObjectURL(profileImage)} alt="product_profileImage" className="h-20 w-20 object-cover rounded-full" />
+                                    <img src={URL.createObjectURL(profileImage)} alt="product_profileImage" className="h-20 w-full md:w-80 object-cover rounded-full" />
                                 </div>
                             )
                         }
                     </div>
-                    <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your password" />
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Confirm password" />
+                    <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your password" />
+                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Confirm password" />
                     <button type="submit" className="border-solid border-2 my-1 py-1 w-1/2 mx-auto rounded-full hover:bg-white hover:text-teal-700">Sign Up</button>
                     <p className="text-sm">Already have an account? <Link to="/sign_in" className="underline underline-offset-2">Sign In</Link></p>
                 </form>
