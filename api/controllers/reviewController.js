@@ -1,8 +1,5 @@
 import reviewModel from "../models/reviewModel.js"
-import userModel from "../models/userModel.js"
-import blogModel from "../models/blogModel.js"
 import asyncHandler from "express-async-handler"
-import { isExist, isNotExist } from "../utils/checkExist.js"
 
 //*** Get all Reviews Of a single blog */
 
@@ -24,6 +21,7 @@ export const createReview = asyncHandler(async (req, res, next) => {
     const { review } = req.body
     const { blogId } = req.params
     const userId = req.user.id
+
     const newReview = await reviewModel.create({ review, blog: blogId, user: userId })
 
     res.status(200).json({ status: "success", message: "Review created successfully", data: newReview })
@@ -42,14 +40,9 @@ export const updateReview = asyncHandler(async (req, res, next) => {
     res.status(200).json({ status: "success", message: "Review updated successfully", data: updatedReview })
 })
 
-
 //*** Delete Review */
 
 export const deleteReview = asyncHandler(async (req, res, next) => {
-
-    console.log(req.user.id)
-    console.log(req.params)
-
     const deleteReview = await reviewModel.findByIdAndDelete(req.params.reviewId)
 
     if (!deleteReview) return res.status(200).json({ status: "error", message: "Review not exist or already has been deleted", data: deleteReview })

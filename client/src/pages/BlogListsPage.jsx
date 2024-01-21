@@ -45,17 +45,17 @@ const BlogListsPage = () => {
     return (
         <Template>
             <main className="w-full flex flex-wrap gap justify-center items-center py-24">
-                <div className="flex  w-full justify-start  items-center pb-16">
-                    <form className="flex gap-x-6 justify-center w-10/12" >
-                        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
-                        <button type="submit" onClick={handleSearch} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md md:py-2 md:px-8 ">Search</button>
+                <div className="flex flex-col  w-full gap-y-4 justify-start  items-center pb-10 md:pb-16 md:flex">
+                    <form className="flex px-3 gap-x-2 md:gap-x-6 justify-between w-full md:w-10/12 " >
+                        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-4/5 md:w-2/3 border-2 border-solid border-teal-600 rounded-full focus:outline-teal-400 px-3" />
+                        <button type="submit" onClick={handleSearch} className="font-semibold hover:bg-teal-200 bg-teal-300   rounded-md py-2 px-4 ">Search</button>
                     </form>
-                    <div className="h-full flex gap-x-1 relative">
+                    <div className="h-ful px-3 flex justify-end w-full gap-x-3 relative">
                         <Link to="/create_blog">
-                            <button className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 md:px-3"><IoAddOutline />
+                            <button className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 px-3"><IoAddOutline />
                             </button>
                         </Link>
-                        <button type="button" onClick={() => setSortBy(!sortBy)} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 md:px-3 "><IoFilterSharp />
+                        <button type="button" onClick={() => setSortBy(!sortBy)} className="font-semibold hover:bg-teal-200 bg-teal-300 rounded-md h-full py-3 px-3 "><IoFilterSharp />
                         </button>
                         {
                             sortBy &&

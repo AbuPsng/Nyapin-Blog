@@ -43,5 +43,9 @@ app.get("/", (req, res) => {
 app.use((err, req, res, next) => {
     console.log("global error")
     console.log(err)
+    console.log(err.message)
+    if (err.message === "E11000 duplicate key error collection") {
+        return res.status(err.statusCode || 500).json({ status: 'error', error: "You cant have more than 1 review.." })
+    }
     res.status(err.statusCode || 500).json({ status: 'error', error: `${err.message}` })
 })

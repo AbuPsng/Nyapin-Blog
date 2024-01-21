@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { useUser } from "../utils/useUser"
 import axios from "axios"
 import { useState } from "react"
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoCloseSharp } from "react-icons/io5";
 
 const pageLinks = [
     { name: "Home", link: "/" },
@@ -65,9 +67,11 @@ const Navbar = () => {
                             user ?
                                 <>
                                     {/* for mobile screen */}
-                                    <button className="w-6 h-6 bg-slate-900 text-white rounded-full flex justify-center items-top md:hidden " onClick={() => setShowLinks(!showLinks)}>
+                                    <button className="p-1 bg-slate-900 text-white rounded-full flex  md:hidden " onClick={() => setShowLinks(!showLinks)}>
                                         {
-                                            showLinks ? "x" : "+"
+                                            showLinks ? <IoCloseSharp />
+                                                : <RxHamburgerMenu />
+
                                         }
                                     </button>
 
@@ -91,13 +95,19 @@ const Navbar = () => {
             </header>
             {/* nav models for links */}
             {showLinks ?
-                <ul className="flex text-[12px] w-full items-center flex-col right-0 left-0 bg-teal-500  absolute  md:hidden">
+                <ul className="flex text-[12px] w-full items-center z-20 flex-col right-0 left-0 top-[67px] bg-teal-500  fixed  md:hidden">
                     {
                         pageLinks.map(links => (
                             <Link to={links.link} key={links.name} className="px-2 pt-1 flex md:hidden" >{links.name}</Link>
                         ))
                     }
-                    <li className="px-3 py-1 flex md:hidden">Log out</li>
+                    {
+                        user && <Link to="/my_blogs" className="px-3 text-center hover:text-gray-600 w-full">My Blogs</Link>
+                    }
+                    {
+                        user?.userId === import.meta.env.VITE_ADMIN1 && <Link to="/all_users" className="px-3 py-2  hover:text-gray-600 md:flex" >All Users</Link>
+                    }
+                    <li className="px-3 py-1 flex "><button onClick={handleLogout} className="w-full h-full">Sign out</button></li>
                 </ul>
                 :
                 null

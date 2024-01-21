@@ -12,7 +12,12 @@ const ReviewModal = ({ blogId, handleGetAllReviews, setPostReview }) => {
             handleGetAllReviews()
             setPostReview(false)
             console.log(response)
+            alert(response.data.message)
         } catch (error) {
+            setPostReview(false)
+            if (error.response.data.error.includes("E11000 duplicate key error collection")) {
+                alert("You cant have more than 1 review")
+            }
             console.log(error)
         }
     }

@@ -47,11 +47,6 @@ export const isCommenter = expressAsyncHandler(async (req, res, next) => {
 
     const review = await reviewModel.findById(reviewId)
 
-    console.log(review)
-    console.log(review.user)
-    console.log(commenter)
-    console.log(user)
-
     if (review.user.toString() !== user && commenter.role !== 1) return next(new Error("This is not your comment"))
 
     next()
