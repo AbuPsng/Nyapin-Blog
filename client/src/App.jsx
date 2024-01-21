@@ -12,7 +12,7 @@ import BlogUpdatePage from "./pages/BlogUpdatePage";
 import MyBlogPage from "./pages/MyBlogPage";
 import UsersList from "./pages/UsersList";
 
-axios.defaults.baseURL = "https://nyapin-blog-backend-dqqb.onrender.com/"
+axios.defaults.baseURL = "https://nyapin-blog-backend-dqqb.onrender.com/api/v1"
 axios.defaults.withCredentials = true
 
 const router = createBrowserRouter([
