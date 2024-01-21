@@ -20,7 +20,7 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/api/v1/sign_in", { email, password })
+            const response = await axios.post("/sign_in", { email, password })
             const data = response.data.data
 
             setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage, phone: data.phone, address: data.address })
@@ -38,7 +38,7 @@ const LoginPage = () => {
     return (
         <Template>
             <main className="h-screen flex justify-center items-center">
-                <form onSubmit={handleLogin} className="bg-gradient-to-t from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-5 p-12">
+                <form onSubmit={handleLogin} className="bg-gradient-to-t from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-5 md:p-12">
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your password" />
                     <div className="flex flex-col my-2 gap-y-2 justify-center">
