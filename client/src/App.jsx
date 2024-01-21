@@ -10,6 +10,7 @@ import UserDetailsPage from "./pages/UserDetailsPage";
 import BlogCreatePage from "./pages/BlogCreatePage";
 import BlogUpdatePage from "./pages/BlogUpdatePage";
 import MyBlogPage from "./pages/MyBlogPage";
+import UsersList from "./pages/UsersList";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 axios.defaults.withCredentials = true
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/my_blogs",
     element: <MyBlogPage />
+  },
+  {
+    path: "/all_users",
+    element: <UsersList />
   },
 ]);
 

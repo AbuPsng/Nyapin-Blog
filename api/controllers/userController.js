@@ -2,11 +2,6 @@ import expressAsyncHandler from "express-async-handler"
 import userModel from "../models/userModel.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 
-export const getAllUser = expressAsyncHandler(async (req, res) => {
-    const users = await userModel.find()
-    res.status(200).json({ status: "success", result: users.length, data: users })
-})
-
 export const updateMe = expressAsyncHandler(async (req, res, next) => {
 
     const cloudinary_image = await uploadOnCloudinary(req.file?.path)
@@ -30,7 +25,7 @@ export const getMe = expressAsyncHandler(async (req, res, next) => {
 
 export const getSingleUser = expressAsyncHandler(async (req, res, next) => {
 
-    const user = await userModel.findById(req.user.userId)
+    const user = await userModel.findById(req.user.id)
 
     if (!user) return next(new Error("Please enter valid user Id"))
 

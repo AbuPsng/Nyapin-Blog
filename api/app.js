@@ -8,6 +8,7 @@ import userRouter from "./routes/userRoutes.js"
 import authRouter from "./routes/authRoutes.js"
 import blogRouter from "./routes/blogRoutes.js"
 import reviewRouter from "./routes/reviewRoutes.js"
+import adminRouter from "./routes/adminRoutes.js"
 import { test } from "./utils/authentication.js"
 const router = express.Router()
 
@@ -29,6 +30,7 @@ app.use(express.static('public'));
 // ******** Routes
 
 app.use("/api/v1/", authRouter)
+app.use("/api/v1/admin", adminRouter)
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/reviews", reviewRouter)

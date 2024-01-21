@@ -8,7 +8,7 @@ import reviewModel from "../models/reviewModel.js"
 //** Checking if user is Admin */
 
 export const isAdmin = expressAsyncHandler(async (req, res, next) => {
-    const user = req.user.userId
+    const user = req.user.id
 
     const author = await userModel.findById(user)
 
