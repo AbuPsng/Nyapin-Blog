@@ -13,7 +13,7 @@ const MyBlogPage = () => {
 
     const handleMyBlogs = async () => {
         try {
-            const response = await axios.get("/blogs/my_blogs")
+            const response = await axios.get("/blogs/my_blogs", { withCredentials: true })
             const data = response.data.data
             console.log(response.data)
             setMyBlogs(data)
