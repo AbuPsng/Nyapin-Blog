@@ -37,6 +37,7 @@ export const sign_in = asyncHandler(async (req, res, next) => {
     res.cookie('blog', token, {
         httpOnly: true,
         sameSite: "None",
+        secure: true
     }).status(202).json({
         status: "success", message: "Logged in successfully", data: {
             name: existUser.name,
