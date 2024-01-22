@@ -10,10 +10,6 @@ const pageLinks = [
     { name: "Blogs", link: "/blog_lists" }
 ]
 
-const authLinks = [
-    { name: "Sign In", link: "/sign_in" },
-]
-
 const Navbar = () => {
 
     const { user, setUser } = useUser()
@@ -63,35 +59,38 @@ const Navbar = () => {
                         {/*//*  show links or not  */}
 
                         {
-                            user ?
-                                <>
-                                    {/* for mobile screen */}
-                                    <button className="p-1 bg-slate-900 text-white rounded-full flex  md:hidden " onClick={() => setShowLinks(!showLinks)}>
-                                        {
-                                            showLinks ? <IoCloseSharp />
-                                                : <RxHamburgerMenu />
+                            // user ?
+                            <>
+                                {/* for mobile screen */}
+                                <button className="p-1 bg-slate-900 text-white rounded-full flex  md:hidden " onClick={() => setShowLinks(!showLinks)}>
+                                    {
+                                        showLinks ? <IoCloseSharp />
+                                            : <RxHamburgerMenu />
 
-                                        }
-                                    </button>
+                                    }
+                                </button>
 
-                                    {/* for big screen */}
-                                    <div className="items-center gap-x-2 justify-center hidden md:flex">
-                                        <Link to="/my_details">
-                                            <img className="w-10 h-10 rounded-full object-cover" src={`${user.profileImage || "images/default.png"}`} alt={`${user.name} profile image`} />
-                                        </Link>
-                                        <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-teal-400 hover:bg-teal-300 text-white rounded-sm">Sign Out</button>
-                                    </div>
-                                </>
-                                :
-                                // login and registration
-                                authLinks.map(links => (
-                                    <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign In" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
-                                ))
+                                {/* for big screen */}
+                                <div className="items-center gap-x-2 justify-center hidden md:flex">
+                                    <Link to="/my_details">
+                                        <img className="w-10 h-10 rounded-full object-cover" src={`${user?.profileImage || "images/default.png"}`} alt={`${user?.name} profile image`} />
+                                    </Link>
+                                    <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-teal-400 hover:bg-teal-300 text-white rounded-sm">Sign Out</button>
+                                </div>
+                            </>
+                            // :
+                            // login and registration
+                            // authLinks.map(links => (
+                            //     <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign In" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
+                            // ))
+                            // null
                         }
                     </ul>
 
                 </div>
             </header>
+
+
             {/* nav models for links */}
             {showLinks ?
                 <ul className="flex text-[12px] w-full items-center z-20 flex-col right-0 left-0 top-[67px] bg-teal-500  fixed  md:hidden">
@@ -106,7 +105,12 @@ const Navbar = () => {
                     {
                         user?.userId === import.meta.env.VITE_ADMIN1 && <Link to="/all_users" className="px-3 py-2  hover:text-gray-600 md:flex" >All Users</Link>
                     }
-                    <li className="px-3 py-1 flex "><button onClick={handleLogout} className="w-full h-full">Sign out</button></li>
+                    {
+                        user ?
+                            <li className="px-3 py-1 flex "><button onClick={handleLogout} className="w-full font-semibold h-full">Sign Out</button></li>
+                            :
+                            <Link to="sign_in" className="px-3 py-1 flex  font-semibold">Sign In</Link>
+                    }
                 </ul>
                 :
                 null
