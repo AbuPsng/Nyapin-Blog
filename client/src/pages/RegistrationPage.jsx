@@ -42,7 +42,7 @@ const RegisterPage = () => {
         <Template>
             <main className="h-screen flex justify-center items-center">
                 {isLoading && <ShowModel message='Loading....' />}
-                <form onSubmit={handleRegister} className="bg-gradient-to-t w-full from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-4 p-12">
+                <form onSubmit={handleRegister} className="bg-gradient-to-t w-full md:w-1/2 from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-4 p-12">
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your name" />
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
                     <div className=" w-full flex justify-center">
