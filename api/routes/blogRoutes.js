@@ -16,9 +16,9 @@ router.get("/", getAllBlog)
 router.get("/search", searchByTerm)
 router.get("/sorted", sortBlogs)
 
-router.route("/:blogId").get(getSingleBlog)
-
 router.get("/my_blogs", isSignIn, getMyBlogs)
+
+router.route("/:blogId").get(getSingleBlog)
 
 router.post("/create_blog", isSignIn, upload.single("file"), createBlog)
 
