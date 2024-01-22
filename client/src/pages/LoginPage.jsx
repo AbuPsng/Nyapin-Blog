@@ -20,7 +20,7 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/sign_in", { email, password })
+            const response = await axios.post("/sign_in", { email, password }, { withCredentials: true })
             const data = response.data.data
 
             setUser({ ...user, name: data.name, email: data.email, userId: data._id, profileImage: data.profileImage, phone: data.phone, address: data.address })

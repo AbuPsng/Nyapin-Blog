@@ -32,8 +32,6 @@ export const sign_in = asyncHandler(async (req, res, next) => {
 
     const token = generateToken(res, existUser._id)
 
-    console.log(req.cookies, "before")
-
     res.cookie('blog', token, {
         httpOnly: true,
         sameSite: "None",
@@ -49,7 +47,6 @@ export const sign_in = asyncHandler(async (req, res, next) => {
             address: existUser.address,
         }
     })
-    console.log(req.cookies, "after")
 }
 )
 
