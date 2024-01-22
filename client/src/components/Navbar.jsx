@@ -59,61 +59,66 @@ const Navbar = () => {
                         {/*//*  show links or not  */}
 
                         {
-                            // user ?
-                            <>
-                                {/* for mobile screen */}
-                                <button className="p-1 bg-slate-900 text-white rounded-full flex  md:hidden " onClick={() => setShowLinks(!showLinks)}>
-                                    {
-                                        showLinks ? <IoCloseSharp />
-                                            : <RxHamburgerMenu />
+                            user ?
+                                <>
+                                    {/* for mobile screen */}
+                                    <button className="p-1 bg-slate-900 text-white rounded-full flex  md:hidden " onClick={() => setShowLinks(!showLinks)}>
+                                        {
+                                            showLinks ? <IoCloseSharp />
+                                                : <RxHamburgerMenu />
 
-                                    }
-                                </button>
-
-                                {/* for big screen */}
-                                <div className="items-center gap-x-2 justify-center hidden md:flex">
-                                    <Link to="/my_details">
-                                        <img className="w-10 h-10 rounded-full object-cover" src={`${user?.profileImage || "images/default.png"}`} alt={`${user?.name} profile image`} />
-                                    </Link>
-                                    <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-teal-400 hover:bg-teal-300 text-white rounded-sm">Sign Out</button>
-                                </div>
-                            </>
-                            // :
+                                        }
+                                    </button>
+                                </>
+                                :
+                                <Link to={"/sign_in"} className={`text-white px-4 py-2 rounded-base bg-black hover:text-white  hover:rounded-2xl`} >Sign In</Link>
+                        }
+                        {user ?
+                            < div className="items-center gap-x-2 justify-center hidden md:flex">
+                                <Link to="/my_details">
+                                    <img className="w-10 h-10 rounded-full object-cover" src={`${user?.profileImage || "images/default.png"}`} alt={`${user?.name} profile image`} />
+                                </Link>
+                                <button onClick={handleLogout} className="px-4 py-2 ml-3 bg-teal-400 hover:bg-teal-300 text-white rounded-sm">Sign Out</button>
+                            </div>
+                            :
+                            null
+                        }
+                    </ul>
+                    {/* // :
                             // login and registration
                             // authLinks.map(links => (
                             //     <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign In" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
                             // ))
                             // null
-                        }
-                    </ul>
-
-                </div>
-            </header>
+                        } */}
+                </div >
+            </header >
 
 
             {/* nav models for links */}
-            {showLinks ?
-                <ul className="flex text-[12px] w-full items-center z-20 flex-col right-0 left-0 top-[67px] bg-teal-500  fixed  md:hidden">
-                    {
-                        pageLinks.map(links => (
-                            <Link to={links.link} key={links.name} className="px-2 pt-1 flex md:hidden" >{links.name}</Link>
-                        ))
-                    }
-                    {
-                        user && <Link to="/my_blogs" className="px-3 text-center hover:text-gray-600 w-full">My Blogs</Link>
-                    }
-                    {
-                        user?.userId === import.meta.env.VITE_ADMIN1 && <Link to="/all_users" className="px-3 py-2  hover:text-gray-600 md:flex" >All Users</Link>
-                    }
-                    {
-                        user ?
-                            <li className="px-3 py-1 flex "><button onClick={handleLogout} className="w-full font-semibold h-full">Sign Out</button></li>
-                            :
-                            <Link to="sign_in" className="px-3 py-1 flex  font-semibold">Sign In</Link>
-                    }
-                </ul>
-                :
-                null
+            {
+                showLinks ?
+                    <ul className="flex text-[12px] w-full items-center z-20 flex-col right-0 left-0 top-[67px] bg-teal-500  fixed  md:hidden">
+                        {
+                            pageLinks.map(links => (
+                                <Link to={links.link} key={links.name} className="px-2 pt-1 flex md:hidden" >{links.name}</Link>
+                            ))
+                        }
+                        {
+                            user && <Link to="/my_blogs" className="px-3 text-center hover:text-gray-600 w-full">My Blogs</Link>
+                        }
+                        {
+                            user?.userId === import.meta.env.VITE_ADMIN1 && <Link to="/all_users" className="px-3 py-2  hover:text-gray-600 md:flex" >All Users</Link>
+                        }
+                        {
+                            user ?
+                                <li className="px-3 py-1 flex "><button onClick={handleLogout} className="w-full font-semibold h-full">Sign Out</button></li>
+                                :
+                                <Link to="sign_in" className="px-3 py-1 flex  font-semibold">Sign In</Link>
+                        }
+                    </ul>
+                    :
+                    null
             }
 
 
