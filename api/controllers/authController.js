@@ -32,6 +32,8 @@ export const sign_in = asyncHandler(async (req, res, next) => {
 
     const token = generateToken(res, existUser._id)
 
+    console.log(res.cookie, "before")
+
     res.cookie('blog', token, {
         httpOnly: true,
         sameSite: "None",
@@ -46,6 +48,7 @@ export const sign_in = asyncHandler(async (req, res, next) => {
         }
     })
 })
+console.log(res.cookie, "after")
 
 export const update_password = asyncHandler(async (req, res, next) => {
     const { password, newPassword } = req.body
