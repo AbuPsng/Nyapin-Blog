@@ -30,9 +30,9 @@ app.use(express.static('public'));
 // ******** Routes
 
 app.use("/api/v1/", authRouter)
+app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/admin", adminRouter)
 app.use("/api/v1/user", userRouter)
-app.use("/api/v1/blogs", blogRouter)
 app.use("/api/v1/reviews", reviewRouter)
 app.use("/api/v1/test", test)
 
