@@ -38,7 +38,7 @@ const LoginPage = () => {
     return (
         <Template>
             <main className="h-screen flex justify-center items-center">
-                <form onSubmit={handleLogin} className="bg-gradient-to-t w-full py-4 px-10 md:w-1/2 from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-5 md:p-12">
+                <form onSubmit={handleLogin} className="bg-gradient-to-t w-full py-4 px-10 max-w-[420px] justify-center md:w-1/2 from-teal-400 to-blue-400 flex rounded-sm flex-col gap-y-5 md:p-12">
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your email" />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full md:w-80 text-sm py-2 rounded-md px-4" placeholder="Enter your password" />
                     <div className="flex flex-col my-2 gap-y-2 justify-center">
