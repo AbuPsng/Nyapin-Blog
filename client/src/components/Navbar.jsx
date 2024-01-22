@@ -12,7 +12,6 @@ const pageLinks = [
 
 const authLinks = [
     { name: "Sign In", link: "/sign_in" },
-    { name: "Sign Up", link: "/sign_up" },
 ]
 
 const Navbar = () => {
@@ -86,7 +85,7 @@ const Navbar = () => {
                                 :
                                 // login and registration
                                 authLinks.map(links => (
-                                    <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign Up" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
+                                    <Link to={links.link} key={links.name} className={` hover:text-gray-600 px-4 py-2 rounded-base ${links.name === "Sign In" ? "bg-black text-white hover:text-white hover:rounded-2xl" : ""}`} >{links.name}</Link>
                                 ))
                         }
                     </ul>
