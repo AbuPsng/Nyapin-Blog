@@ -49,14 +49,14 @@ const ReviewSection = ({ blogId }) => {
         <div className="flex w-full relative flex-col gap-y-20  rounded-md px-10  gap-x-4" >
             <h2 className="text-4xl text-center">Reviews</h2>
 
-            <div className="flex flex-col justify-center gap-x-8 overflow-x-auto w-full bg-teal-100 px-3 py-6 md:flex-row">
+            <div className="flex flex-col gap-y-2 justify-center gap-x-8 overflow-y-auto md:overflow-x-auto w-full bg-teal-100 px-3 py-6 md:flex-row">
                 {
                     !reviews.length > 0 ? <h3 className="text-xl font-semibold text-center">No Reviews Yet</h3>
                         :
                         reviews?.map(review => (
 
 
-                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex relative rounded-md flex-col items-start py-4 gap-y-6 px-4 bg-blue-200 hover:bg-blue-400 w-full md:w-1/3 h-full`}>
+                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex relative rounded-md flex-col items-start gap-y-3 md:gap-y-6 p-2 md:p-4 bg-blue-200 hover:bg-blue-400 w-full md:w-1/3 h-full`}>
                                 {(review?.user?._id === user?.userId || user?.userId === import.meta.env.VITE_ADMIN1) && <div className="absolute right-2 top-2 ">
                                     <button onClick={() => setUpdateReviewId(review._id)} className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3"><FaEdit /></button>
                                     <button onClick={() => setDeleteReviewId(review._id)} className="font-semibold bg-red-200 hover:bg-red-400 rounded-lg md:py-2 md:px-3 "><MdDelete /></button>
@@ -72,7 +72,7 @@ const ReviewSection = ({ blogId }) => {
                                 }
 
                                 <div className="flex items-center w-full gap-x-3">
-                                    <img src={review.user.profileImage} className="w-12 h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
+                                    <img src={review.user.profileImage} className="md:w-12 md:h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
                                     <h3 className="text-md font-semibold">{review.user.name}</h3>
                                 </div>
                                 <p className="text-sm ">{review.review.length > 40 ? `${review.review.split(0, 10)}...` : review.review}</p>
@@ -87,7 +87,7 @@ const ReviewSection = ({ blogId }) => {
                     :
                     null
             }
-            <button onClick={() => setPostReview(!postReview)} className="px-7 py-2 w-1/4 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
+            <button onClick={() => setPostReview(!postReview)} className="px-7 py-2 w-1/2 md:w-1/4 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
 
         </div >
     )
