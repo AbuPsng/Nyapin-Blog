@@ -49,14 +49,14 @@ const ReviewSection = ({ blogId }) => {
         <div className="flex w-full relative flex-col gap-y-20  rounded-md px-10 " >
             <h2 className="text-4xl text-center">Reviews</h2>
 
-            <div className="flex  gap-y-2 justify-center gap-x-8 h-36 overflow-x-auto w-full bg-teal-100 px-3 py-6 md:flex-row">
+            <div className="flex  gap-y-2 justify-center gap-x-8 h-36 w-40 overflow-x-auto md:w-full bg-teal-100 px-3 py-6 md:flex-row">
                 {
                     !reviews.length > 0 ? <h3 className="text-xl font-semibold text-center">No Reviews Yet</h3>
                         :
                         reviews?.map(review => (
 
 
-                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex relative rounded-md flex-col items-start gap-y-3 md:gap-y-6 p-2 md:p-4 bg-blue-200 hover:bg-blue-400 w-10/12  h-full`}>
+                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex relative rounded-md flex-col items-start gap-y-3 md:gap-y-6 p-2 md:p-4 bg-blue-200 hover:bg-blue-400 w-10/12 md:w-1/3 h-full`}>
                                 {(review?.user?._id === user?.userId || user?.userId === import.meta.env.VITE_ADMIN1) && <div className="absolute right-2 top-2 ">
                                     <button onClick={() => setUpdateReviewId(review._id)} className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3"><FaEdit /></button>
                                     <button onClick={() => setDeleteReviewId(review._id)} className="font-semibold bg-red-200 hover:bg-red-400 rounded-lg md:py-2 md:px-3 "><MdDelete /></button>
