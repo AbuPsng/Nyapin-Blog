@@ -17,7 +17,6 @@ const ReviewSection = ({ blogId }) => {
 
     const [updateReviewId, setUpdateReviewId] = useState(false)
 
-
     const { user } = useUser()
 
     const handleGetAllReviews = async () => {
@@ -56,7 +55,7 @@ const ReviewSection = ({ blogId }) => {
                         reviews?.map(review => (
 
 
-                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex w-9/12 relative rounded-md flex-col items-start gap-y-3 md:gap-y-6 p-2 md:p-4 bg-blue-200 hover:bg-blue-400  md:w-1/3 h-full`}>
+                            <div key={review._id} className={` ${review?.user?._id === user?.userId ? "order-first bg-blue-500 " : ""} flex w-9/12 relative rounded-md flex-col items-start gap-y-3 md:gap-y-6 p-2 md:p-4 bg-blue-200 hover:bg-blue-400 md:min-w-1/3 min-10/12  h-full`}>
                                 {(review?.user?._id === user?.userId || user?.userId === import.meta.env.VITE_ADMIN1) && <div className="absolute right-2 top-2 ">
                                     <button onClick={() => setUpdateReviewId(review._id)} className="font-semibold bg-teal-200 hover:bg-teal-400 rounded-lg mr-1 md:py-2  md:px-3"><FaEdit /></button>
                                     <button onClick={() => setDeleteReviewId(review._id)} className="font-semibold bg-red-200 hover:bg-red-400 rounded-lg md:py-2 md:px-3 "><MdDelete /></button>
@@ -72,11 +71,12 @@ const ReviewSection = ({ blogId }) => {
                                 }
 
                                 <div className="flex items-center w-full gap-x-3">
-                                    <img src={review.user.profileImage} className="w-6 h-6 md:w-12 md:h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
+                                    <img src={'images/default.png'} className="w-6 h-6 md:w-12 md:h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
                                     <h3 className="text-md font-semibold">{review.user.name}</h3>
                                 </div>
                                 <p className="text-sm ">{review.review.length > 40 ? `${review.review.split(0, 10)}...` : review.review}</p>
                             </div>
+
                         ))
                 }
             </div>
