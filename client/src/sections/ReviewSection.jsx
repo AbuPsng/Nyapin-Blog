@@ -72,7 +72,7 @@ const ReviewSection = ({ blogId }) => {
                                 }
 
                                 <div className="flex items-center w-full gap-x-3">
-                                    <img src={review.user.profileImage} className="w-8 h-8 md:w-12 md:h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
+                                    <img src={review.user.profileImage} className="w-6 h-6 md:w-12 md:h-12 rounded-full object-cover" alt={`${review.user.name}-profile_image`} />
                                     <h3 className="text-md font-semibold">{review.user.name}</h3>
                                 </div>
                                 <p className="text-sm ">{review.review.length > 40 ? `${review.review.split(0, 10)}...` : review.review}</p>
