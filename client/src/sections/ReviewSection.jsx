@@ -49,7 +49,7 @@ const ReviewSection = ({ blogId }) => {
         <div className="flex w-full relative flex-col gap-y-20  rounded-md px-10 " >
             <h2 className="text-4xl text-center">Reviews</h2>
 
-            <div className="flex gap-y-2 justify-center gap-x-8 h-36 w-full overflow-x-auto md:w-80 bg-teal-100 px-3 py-6 md:flex-row">
+            <div className="flex gap-y-2 justify-center gap-x-8 h-36 w-full overflow-x-auto bg-teal-100 px-3 py-6 md:flex-row">
                 {
                     !reviews.length > 0 ? <h3 className="text-xl font-semibold text-center">No Reviews Yet</h3>
                         :
