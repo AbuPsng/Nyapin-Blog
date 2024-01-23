@@ -87,7 +87,9 @@ const ReviewSection = ({ blogId }) => {
                     :
                     null
             }
-            <button onClick={() => setPostReview(!postReview)} className="px-7 py-2 w-1/2 md:w-1/4 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
+            {
+                user && <button onClick={() => setPostReview(!postReview)} className="px-7 py-2 w-1/2 md:w-1/4 bg-teal-200 hover:bg-teal-400 rounded-md">Give Review</button>
+            }
 
         </div >
     )
