@@ -46,7 +46,7 @@ const ReviewSection = ({ blogId }) => {
     }, [blogId])
 
     return (
-        <div className="flex w-full relative flex-col gap-y-20  rounded-md px-10  gap-x-4" >
+        <div className="flex w-full relative flex-col gap-y-20  rounded-md px-10 " >
             <h2 className="text-4xl text-center">Reviews</h2>
 
             <div className="flex  gap-y-2 justify-center gap-x-8 h-36 overflow-x-auto w-full bg-teal-100 px-3 py-6 md:flex-row">
